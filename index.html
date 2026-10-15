@@ -1,0 +1,1178 @@
+<title>Two Beauty</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Cormorant:ital,wght@1,400;1,500;1,600&family=Manrope:wght@300;400;500;600;700&display=swap">
+<style>
+/* Layout concept: white page, black accents, huge uppercase hero that slides in letter by letter over two drifting outlined circles (the duo);
+   black marquee, numbered service cards that fill black on hover, a nail-colour try-on, studio statement with counters,
+   team, an Instagram strip, location and a five-step booking card (service, artist, date and time, details, confirm). */
+:root{
+  --bg:#FFFFFF; --bg2:#FFFFFF; --card:#FFFFFF; --ink:#0A0A0A; --muted:#6B6B6B; --line:rgba(10,10,10,.14);
+  --band:#0A0A0A; --band-ink:#FFFFFF; --star:#B8935A; --gold1:#E9D29B; --gold2:#B8935A; --gold3:#8A6A36;
+  --ok:#1D7048; --warn:#8F5E10; --bad:#B3261E;
+  --f-display:'Oswald','Arial Narrow',Impact,sans-serif;
+  --f-serif:'Cormorant',Georgia,'Times New Roman',serif;
+  --f-body:'Manrope','Segoe UI',system-ui,-apple-system,sans-serif;
+  color-scheme:light;
+}
+:root[data-theme="dark"]{
+  --bg:#0A0A0A; --bg2:#0A0A0A; --card:#111111; --ink:#FFFFFF; --muted:#A5A5A5; --line:rgba(255,255,255,.18);
+  --band:#161616; --band-ink:#FFFFFF; --star:#D9B873; --gold1:#F1DEAE; --gold2:#D9B873; --gold3:#A98445;
+  --ok:#5DC79B; --warn:#E3B25C; --bad:#F08A98;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--f-body);-webkit-font-smoothing:antialiased;overflow-x:clip}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:60}
+h1,h2,h3,p{margin:0}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+svg{display:block}
+section{scroll-margin-top:70px}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.wrap{max-width:1240px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.sec{padding-block:110px}
+.disp{font-family:var(--f-display);font-weight:600;text-transform:uppercase;line-height:.95;letter-spacing:.005em}
+.eyebrow{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.26em;text-transform:uppercase;font-weight:600}
+.eyebrow::before{content:"✦";color:var(--star);font-size:14px;letter-spacing:0}
+.sec-head{display:grid;gap:18px;margin-bottom:56px;max-width:760px}
+.sec-head h2{font-size:clamp(40px,7vw,92px)}
+.sec-head p{color:var(--muted);max-width:56ch}
+.it{font-family:var(--f-serif);font-style:italic;font-weight:500;text-transform:none;letter-spacing:0;color:var(--star)}
+.it,.it .ch{background:linear-gradient(100deg,var(--gold3),var(--gold2) 35%,var(--gold1) 55%,var(--gold2) 75%,var(--gold3));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.dbl{position:relative}
+.dbl::after{content:"";position:absolute;inset:6px;border:1px solid var(--star);border-radius:inherit;opacity:.55;pointer-events:none}
+.arch{position:relative;border-radius:999px 999px 18px 18px;overflow:hidden;box-shadow:0 0 0 1.5px var(--star),0 0 0 6px var(--bg),0 0 0 7px color-mix(in srgb,var(--star) 55%,transparent)}
+.art{width:100%;height:100%;display:block}
+.ph{display:block;position:relative;width:100%;height:100%}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.7em;padding:1em 1.8em;border:1.5px solid var(--ink);background:var(--ink);color:var(--bg);font-size:13px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;text-decoration:none;border-radius:999px;overflow:hidden;transition:background .3s,color .3s,transform .3s}
+.btn:hover{background:transparent;color:var(--ink)}
+.btn.line{background:transparent;color:var(--ink)}
+.btn.line:hover{background:var(--ink);color:var(--bg)}
+.btn.inv{background:var(--band-ink);color:var(--band);border-color:var(--band-ink)}
+.btn.inv:hover{background:transparent;color:var(--band-ink)}
+.btn.sm{padding:.7em 1.2em;font-size:12px}
+.btn[disabled]{opacity:.45;pointer-events:none}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:14px;min-height:66px}
+.prog{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:var(--ink);transform:scaleX(0);transform-origin:0 50%}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand img{width:40px;height:40px;border-radius:50%;border:1px solid var(--line)}
+.brand span{font-family:var(--f-display);font-weight:600;font-size:21px;letter-spacing:.14em}
+.links{display:flex;gap:26px;margin-left:auto}
+.links a{position:relative;font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;text-decoration:none;padding-block:6px}
+.links a::after{content:"";position:absolute;left:0;bottom:0;height:1.5px;width:100%;background:var(--ink);transform:scaleX(0);transform-origin:0 50%;transition:transform .35s}
+.links a:hover::after,.links a.on::after{transform:scaleX(1)}
+.ctrl{display:flex;align-items:center;gap:10px}
+.seg{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.seg button{background:none;border:0;padding:7px 10px;font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.icon-btn{width:36px;height:36px;display:grid;place-items:center;background:none;border:1px solid var(--line);border-radius:50%}
+.icon-btn:hover{border-color:var(--ink)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;isolation:isolate;padding-block:54px 70px}
+.hero .circ{position:absolute;z-index:-1;border:1.5px solid var(--star);border-radius:50%;opacity:.9}
+.hero .c1{width:min(56vw,640px);aspect-ratio:1;right:-6%;top:6%;animation:drift1 14s ease-in-out infinite alternate}
+.hero .c2{width:min(56vw,640px);aspect-ratio:1;right:10%;top:20%;animation:drift2 16s ease-in-out infinite alternate;border-style:dashed;opacity:.5}
+.hero .c3{width:84px;aspect-ratio:1;right:3%;top:3%;background:linear-gradient(135deg,var(--gold1),var(--gold2) 55%,var(--gold3));border:0;opacity:1;animation:bob 6s ease-in-out infinite alternate}
+@keyframes drift1{from{transform:translate(0,0) rotate(0)}to{transform:translate(-4%,5%) rotate(40deg)}}
+@keyframes drift2{from{transform:translate(0,0)}to{transform:translate(6%,-6%)}}
+@keyframes bob{from{transform:translateY(-14px) scale(.94)}to{transform:translateY(22px) scale(1.06)}}
+.hi{display:flex;align-items:center;gap:12px;font-size:13px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;margin-bottom:26px}
+.hi i{font-style:normal;color:var(--star);font-size:18px;animation:spin 8s linear infinite;display:inline-block}
+.mega{font-size:clamp(44px,8.4vw,132px)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:40px;align-items:center}
+.hero-art{position:relative;height:min(62vw,560px);margin-bottom:10px}
+.hero-art .arch{position:absolute}
+.hero-art .a1{left:26%;top:0;width:48%;height:100%}
+.hero-art .a2{left:0;bottom:6%;width:34%;height:48%;z-index:2}
+.hero-art .a3{right:0;top:8%;width:34%;height:46%}
+.mega .ln{display:block;overflow:hidden;padding-bottom:.04em}
+.mega .ch{display:inline-block;animation:chUp 1s cubic-bezier(.2,.85,.2,1) both;animation-delay:calc(var(--i)*38ms + var(--d,0ms))}
+.mega .sp{display:inline-block;width:.26em}
+.mega .wd{display:inline-block;white-space:nowrap}
+.mega .it{font-size:.78em;line-height:1}
+@keyframes chUp{from{transform:translateY(105%);opacity:.2}to{transform:none;opacity:1}}
+.sub{display:flex;flex-wrap:wrap;gap:6px 22px;margin:28px 0 36px;font-family:var(--f-display);text-transform:uppercase;font-size:clamp(22px,3vw,34px);font-weight:500;letter-spacing:.04em}
+.sub span{animation:fade 1s both}
+.sub span:nth-child(2){animation-delay:.12s}.sub span:nth-child(3){animation-delay:.24s}.sub span:nth-child(4){animation-delay:.36s}
+@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.hero-foot{display:flex;flex-wrap:wrap;gap:22px 34px;align-items:center}
+.chip-i{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:999px;padding:9px 16px 9px 12px;font-size:14px;font-weight:600;background:color-mix(in srgb,var(--bg) 80%,transparent)}
+.chip-i b{color:var(--star)}
+.badge{position:absolute;right:-18px;bottom:-34px;width:150px;height:150px;z-index:3;display:grid;place-items:center;text-decoration:none}
+.badge svg.rot{position:absolute;inset:0;width:100%;height:100%;animation:spin 18s linear infinite}
+.badge text{font-family:var(--f-body);font-weight:700;font-size:15px;letter-spacing:.14em;fill:var(--ink)}
+.badge .core{width:76px;height:76px;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;transition:transform .4s}
+.badge:hover .core{transform:scale(1.14) rotate(-45deg)}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* marquee */
+.band{background:var(--band);color:var(--band-ink);overflow:hidden;padding-block:26px;display:grid;gap:10px}
+.mq{display:flex;width:max-content;animation:scroll 50s linear infinite}
+.mq.rev{animation-direction:reverse;animation-duration:64s}
+.band:hover .mq{animation-play-state:paused}
+.mq span{display:flex;align-items:center;gap:34px;padding-right:34px;white-space:nowrap;font-family:var(--f-display);font-weight:600;text-transform:uppercase;font-size:clamp(34px,5vw,64px);line-height:1.15}
+.mq span b{font-weight:600;-webkit-text-stroke:1.4px var(--band-ink);color:transparent}
+.mq.rev span{font-family:var(--f-serif);font-style:italic;text-transform:none;font-weight:500;font-size:clamp(26px,3.6vw,46px)}
+.mq i{font-style:normal;color:var(--star);font-size:.55em}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* services */
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.card{position:relative;box-shadow:inset 0 0 0 5px var(--card),inset 0 0 0 6px color-mix(in srgb,var(--star) 50%,transparent);display:flex;flex-direction:column;justify-content:space-between;gap:34px;min-height:330px;padding:26px;border:1.5px solid var(--ink);border-radius:22px;background:var(--card);text-align:left;overflow:hidden;isolation:isolate;transition:color .45s,transform .45s}
+.card::before{content:"";position:absolute;inset:0;background:var(--ink);transform:translateY(101%);transition:transform .55s cubic-bezier(.7,0,.2,1);z-index:-1;border-radius:inherit}
+.card:hover,.card:focus-visible{color:var(--bg);transform:translateY(-6px)}
+.card:hover::before,.card:focus-visible::before{transform:none}
+.card .top{display:flex;justify-content:space-between;align-items:flex-start}
+.card .no{font-family:var(--f-display);font-size:18px;font-weight:500;letter-spacing:.1em}
+.card .ci{width:72px;height:96px;flex:none}
+.card h3{font-family:var(--f-display);font-weight:600;text-transform:uppercase;font-size:30px;line-height:1.02;margin-bottom:10px}
+.card p{font-size:14px;line-height:1.55;opacity:.78}
+.card .arr{position:absolute;right:22px;bottom:22px;width:40px;height:40px;border-radius:50%;border:1.5px solid currentColor;display:grid;place-items:center;transition:transform .4s}
+.card:hover .arr{transform:rotate(-45deg)}
+.card .txt{padding-right:46px}
+.card.cta{background:var(--ink);color:var(--bg);justify-content:flex-end}
+.card.cta::before{background:var(--bg2);}
+.card.cta:hover{color:var(--ink)}
+.card.cta h3{font-size:44px}
+.ic{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.card:hover .ic path,.card:hover .ic circle{stroke-dasharray:1;animation:draw 1.1s cubic-bezier(.6,0,.3,1) both}
+.draw path,.draw circle{stroke-dasharray:1;animation:draw 1.2s cubic-bezier(.6,0,.3,1) both}
+@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+
+/* colour try-on */
+.tryon{background:var(--bg2);border-top:1px solid var(--line)}
+.try{display:block;max-width:760px;margin-inline:auto;text-align:center}.try .eyebrow{justify-content:center}.try p{margin-inline:auto}.try #shades,.try .shades{justify-content:center}
+.hand{width:100%;max-width:410px;margin-inline:auto;overflow:visible}
+.hand .nail{transform-box:fill-box;transform-origin:50% 100%}
+.hand.pop .nail{animation:pop .55s calc(var(--i)*70ms) both}
+@keyframes pop{0%{transform:scale(.7,.5);opacity:.4}60%{transform:scale(1.08,1.08);opacity:1}100%{transform:none;opacity:1}}
+.hand .gl{animation:glint 3.8s ease-in-out infinite}
+@keyframes glint{0%,100%{opacity:.18}50%{opacity:.6}}
+@keyframes twinkle{0%,100%{opacity:.2;transform:scale(.6)}50%{opacity:1;transform:scale(1.1)}}
+.shades{display:flex;flex-wrap:wrap;gap:14px;margin:30px 0 22px}
+.sw{width:52px;height:52px;border-radius:50%;border:2px solid transparent;padding:3px;background:none;transition:transform .25s,border-color .25s}
+.sw i{display:block;width:100%;height:100%;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.14)}
+.sw:hover{transform:translateY(-4px)}
+.sw[aria-pressed="true"]{border-color:var(--ink)}
+.shade-name{margin-bottom:26px}
+.shade-name small{display:block;font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;margin-bottom:8px;color:var(--muted)}
+.shade-name span{font-family:var(--f-display);font-weight:600;font-size:clamp(40px,6vw,72px);text-transform:uppercase;line-height:1}
+
+/* studio */
+.studio{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:72px;align-items:start}
+.statement{font-family:var(--f-serif);font-style:italic;font-weight:500;font-size:clamp(34px,4.6vw,64px);line-height:1.08}
+.statement b{font-family:var(--f-display);font-style:normal;font-weight:600;text-transform:uppercase;letter-spacing:.01em}
+.blocks{border-top:1.5px solid var(--ink)}
+.blk{display:grid;grid-template-columns:56px minmax(0,1fr);gap:18px;padding:24px 0;border-bottom:1px solid var(--line)}
+.blk .n{font-family:var(--f-display);font-size:22px;font-weight:500;color:var(--star)}
+.blk h3{font-family:var(--f-display);font-weight:600;font-size:26px;text-transform:uppercase;margin-bottom:4px}
+.blk p{color:var(--muted);font-size:15px}
+.stats{background:var(--band);color:var(--band-ink)}
+.stats .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;padding-block:56px}
+.stats b{display:block;font-family:var(--f-display);font-weight:600;font-size:clamp(46px,7vw,96px);line-height:1;font-variant-numeric:tabular-nums}
+.stats span{font-size:12px;letter-spacing:.24em;text-transform:uppercase;opacity:.7}
+
+/* team */
+.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.m{position:relative;box-shadow:inset 0 0 0 6px var(--bg),inset 0 0 0 7px color-mix(in srgb,var(--star) 55%,transparent);display:grid;gap:20px;align-content:space-between;min-height:440px;padding:36px;border:1.5px solid var(--ink);border-radius:26px;overflow:hidden;isolation:isolate}
+.m.dark{background:var(--ink);color:var(--bg)}
+.m .m-art{position:absolute;right:30px;bottom:30px;width:38%;aspect-ratio:3/4;z-index:0;transition:transform .7s}
+.m:hover .m-art{transform:translateY(-8px) rotate(-1.5deg)}
+.m>*:not(.m-art){position:relative;z-index:1;max-width:56%}
+.m.dark .m-art{box-shadow:0 0 0 1.5px var(--star),0 0 0 6px var(--ink),0 0 0 7px color-mix(in srgb,var(--star) 60%,transparent)}
+.tri{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:48px;padding:8px}
+.tri .arch{aspect-ratio:3/4}.tri .arch:nth-child(2){margin-top:40px}
+.m .role{font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;display:flex;gap:10px;align-items:center}
+.m .role::before{content:"✦";color:var(--star)}
+.m h3{font-family:var(--f-display);font-weight:600;text-transform:uppercase;font-size:clamp(40px,5vw,64px);line-height:1}
+.m .at{opacity:.75;font-size:15px}
+.m .btn{justify-self:start}
+.m.dark .btn{background:var(--bg);color:var(--ink);border-color:var(--bg)}
+.m.dark .btn:hover{background:transparent;color:var(--bg)}
+
+/* looks strip */
+.looks-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:24px;margin-bottom:34px}
+.looks-head .sec-head{margin:0}
+.nav-arr{display:flex;gap:10px}
+.nav-arr button{width:52px;height:52px;border-radius:50%;border:1.5px solid var(--ink);background:none;display:grid;place-items:center;transition:background .3s,color .3s}
+.nav-arr button:hover{background:var(--ink);color:var(--bg)}
+.strip{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:16px;scrollbar-width:thin}
+.tile{position:relative;flex:none;width:min(72vw,290px);aspect-ratio:3/4;border-radius:22px;overflow:hidden;scroll-snap-align:start;display:block;text-decoration:none;color:#fff;isolation:isolate}
+.tile .bg{position:absolute;inset:0;z-index:-1;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.tile .bg::before{content:"";position:absolute;inset:auto 0 0;height:50%;background:linear-gradient(transparent,rgba(10,10,10,.72));z-index:2}
+.tile:hover .bg{transform:scale(1.1) rotate(1deg)}
+
+.t1 .bg{background:linear-gradient(165deg,#3A3A3A,#0A0A0A)}
+.t2 .bg{background:linear-gradient(165deg,#C9A3AE,#4B2A36)}
+.t3 .bg{background:linear-gradient(165deg,#8E8A84,#1B1A19)}
+.t4 .bg{background:linear-gradient(165deg,#E9DFD2,#8C7B66)}
+.tile .tg{position:absolute;left:14px;top:14px;background:#fff;color:#0A0A0A;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;padding:6px 11px;border-radius:999px}
+.tile .pl{position:absolute;right:14px;top:14px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.2);display:grid;place-items:center;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.tile .tic{position:absolute;top:24%;left:50%;width:42%;transform:translateX(-50%);color:rgba(255,255,255,.92)}
+.tile .cap{position:absolute;left:18px;right:18px;bottom:18px;font-family:var(--f-display);font-weight:600;text-transform:uppercase;font-size:28px;line-height:1}
+.tile .cap small{display:block;font-family:var(--f-body);font-size:12px;letter-spacing:.16em;font-weight:600;opacity:.8;margin-top:6px}
+.tile.photo{background:var(--bg2)}
+.tile.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1;transition:transform .8s}
+.tile.photo:hover img{transform:scale(1.07)}
+.tile.photo::after{content:"";position:absolute;inset:auto 0 0;height:45%;background:linear-gradient(transparent,rgba(0,0,0,.6));z-index:-1}
+.tile .rm{position:absolute;right:12px;bottom:12px;background:rgba(0,0,0,.75);border:1px solid rgba(255,255,255,.4);color:#fff;font-size:12px;padding:6px 12px;border-radius:999px}
+.up{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:14px;border:1.5px dashed var(--ink);border-radius:16px;margin-bottom:20px}
+select,input,textarea{font:inherit;color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px}
+
+/* location */
+.loc{background:var(--bg2);border-top:1px solid var(--line)}
+.loc-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px}
+.loc h2{font-size:clamp(40px,7vw,92px);margin:16px 0 24px}
+.loc .addr{font-size:19px;margin-bottom:26px}
+.loc .btns{display:flex;flex-wrap:wrap;gap:10px}
+.hours{list-style:none;margin:0;padding:0;border-top:1.5px solid var(--ink)}
+.hours li{display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.hours li b{font-weight:600}
+.hours li.off{color:var(--muted)}
+.hours-h{font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:700;margin-bottom:14px}
+
+/* booking */
+.bk-card{box-shadow:0 0 0 6px var(--bg),0 0 0 7px color-mix(in srgb,var(--star) 55%,transparent);border:1.5px solid var(--ink);border-radius:28px;background:var(--card);overflow:hidden}
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));list-style:none;margin:0;padding:6px 8px 0;border-bottom:1px solid var(--line);position:relative}
+.steps li{display:flex;align-items:center;justify-content:center;gap:12px;padding:16px 10px 18px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--muted);position:relative;min-width:0;transition:color .3s}
+.steps li+li::before{content:"";position:absolute;left:-28%;top:33px;width:34%;height:1.5px;background:var(--line)}
+.steps li.done+li::before,.steps li.on::before{background:linear-gradient(90deg,var(--gold3),var(--gold1))}
+.steps li b{flex:none;width:42px;height:42px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;background:var(--card);transition:all .35s cubic-bezier(.2,.7,.2,1);position:relative;z-index:1}
+.steps li b svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.steps li span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.steps li.on{color:var(--ink)}
+.steps li.on b{background:linear-gradient(135deg,var(--gold1),var(--gold2) 55%,var(--gold3));border-color:transparent;color:#0A0A0A;box-shadow:0 8px 20px -6px color-mix(in srgb,var(--gold2) 80%,transparent);transform:scale(1.08)}
+.steps li.on::after{content:"";position:absolute;left:18%;right:18%;bottom:-1px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--gold3),var(--gold1),var(--gold3))}
+.steps li.done{color:var(--ink)}
+.steps li.done b{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.pane{padding:36px}
+.pane h3{font-family:var(--f-display);font-weight:600;text-transform:uppercase;font-size:clamp(28px,4vw,44px);margin-bottom:22px}
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.opt{display:flex;align-items:center;gap:12px;text-align:left;padding:16px;border:1.5px solid var(--line);border-radius:16px;background:var(--card);transition:border-color .2s,background .2s,color .2s}
+.opt:hover{border-color:var(--ink)}
+.opt[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.opt .oi{width:30px;height:30px;flex:none}
+.opt i{width:14px;height:14px;border-radius:50%;flex:none;border:1.5px solid currentColor}
+.opt i.o{background:#C9A3AE}.opt i.z{background:var(--star)}.opt i.a{background:linear-gradient(90deg,#C9A3AE 50%,var(--star) 50%)}
+.opt b{font-weight:600;font-size:15px}
+.dates{display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;scroll-snap-type:x proximity;margin-bottom:18px}
+.dates button{flex:none;width:68px;scroll-snap-align:start;display:grid;justify-items:center;padding:10px 0;background:var(--card);border:1.5px solid var(--line);border-radius:16px;line-height:1.25}
+.dates button:hover:not(:disabled){border-color:var(--ink)}
+.dates small{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.dates b{font-family:var(--f-display);font-size:28px;font-weight:600;line-height:1.1}
+.dates button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.dates button[aria-pressed="true"] small{color:inherit;opacity:.75}
+.dates button:disabled{opacity:.35;cursor:not-allowed;text-decoration:line-through}
+.times{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:8px}
+.times button{padding:12px 0;background:var(--card);border:1.5px solid var(--line);border-radius:999px;font-variant-numeric:tabular-nums;font-weight:600}
+.times button:hover:not(:disabled){border-color:var(--ink)}
+.times button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.times button:disabled{opacity:.38;text-decoration:line-through;cursor:not-allowed}
+.times .none{grid-column:1/-1;color:var(--muted)}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.fld{display:grid;gap:6px}.fld.full{grid-column:1/-1}
+.fld label{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:700}
+.fld input,.fld textarea{font-size:16px;width:100%}
+.fld textarea{min-height:92px;resize:vertical}
+.err{color:var(--bad);font-size:14px;min-height:1.3em;margin-top:8px}
+.sum{border-top:1.5px solid var(--ink);margin-bottom:8px}
+.sum div{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.sum span{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--muted);padding-top:3px}
+.sum b{font-weight:600;text-align:right;min-width:0;overflow-wrap:anywhere}
+.nav-b{display:flex;justify-content:space-between;gap:12px;padding:0 36px 36px}
+.hint{color:var(--muted);font-size:14px;padding:0 36px 24px;max-width:70ch}
+.done{padding:48px 36px;display:grid;gap:18px;justify-items:start}
+.done svg{width:72px;height:72px}
+.done h3{font-family:var(--f-display);font-weight:600;text-transform:uppercase;font-size:clamp(34px,5vw,60px);line-height:1}
+.done p{color:var(--muted);max-width:56ch}
+.done pre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;font:500 14px/1.65 var(--f-body);background:var(--bg2);padding:18px;border-radius:14px;width:100%}
+.done .acts{display:flex;flex-wrap:wrap;gap:10px}
+
+/* staff */
+.staff{background:var(--bg2);border-top:1px solid var(--line)}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.tab{background:none;border:1.5px solid var(--line);padding:8px 16px;border-radius:999px;font-size:13px;font-weight:600}
+.tab[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.sf-list{display:grid;gap:10px}
+.bk{display:grid;grid-template-columns:120px minmax(0,1fr) auto;gap:20px;align-items:center;background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:16px 20px}
+.bk .when b{display:block;font-family:var(--f-display);font-size:32px;font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums}
+.bk .when small{font-size:12px;color:var(--muted)}
+.bk .who{min-width:0;display:grid;gap:2px}.bk .who b{font-weight:600;overflow-wrap:anywhere}.bk .who span{color:var(--muted);font-size:14px;overflow-wrap:anywhere}
+.bk .act{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:7px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;padding:5px 11px;border:1.5px solid currentColor;border-radius:999px}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.pill.pending{color:var(--warn)}.pill.confirmed{color:var(--ok)}.pill.cancelled{color:var(--bad)}
+.empty-state{padding:34px;border:1.5px dashed var(--line);border-radius:18px;color:var(--muted);text-align:center}
+
+/* footer */
+.foot{background:var(--band);color:var(--band-ink);padding-block:70px 40px}
+.foot .wrap{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px;align-items:end}
+.foot .big{font-family:var(--f-display);font-weight:700;text-transform:uppercase;font-size:clamp(54px,11vw,170px);line-height:.9}
+.foot p{opacity:.65;margin-top:14px}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.foot li a{display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.2);text-decoration:none;transition:padding .3s}
+.foot li a:hover{padding-left:10px}
+.foot li small{opacity:.6;font-size:13px}
+.foot .fine{grid-column:1/-1;font-size:12px;letter-spacing:.16em;opacity:.5;text-transform:uppercase;padding-top:30px}
+
+.will{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.will.in{opacity:1;transform:none}
+
+@media (max-width:1000px){
+  .links{display:none}.ctrl{margin-left:auto}
+  .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .try,.studio,.loc-grid{grid-template-columns:minmax(0,1fr);gap:40px}
+  .duo{grid-template-columns:minmax(0,1fr)}
+  .stats .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .foot .wrap{grid-template-columns:minmax(0,1fr)}
+  .sec{padding-block:76px}
+  .hero-grid{grid-template-columns:minmax(0,1fr)}.hero-art{height:380px;margin-top:20px}.badge{left:auto;right:0;bottom:-30px;width:120px;height:120px}
+  .bk{grid-template-columns:minmax(0,1fr)}.bk .act{justify-content:flex-start}
+  .steps{padding:8px 4px 0}.steps li{flex-direction:column;gap:7px;padding:10px 0 14px;font-size:9px;letter-spacing:.02em}
+  .steps li b{width:38px;height:38px}.steps li+li::before{top:27px;left:-30%;width:40%}.steps li span{max-width:100%}
+}
+@media (max-width:620px){
+  .brand span{display:none}.nav .btn{display:none}
+  .cards{grid-template-columns:minmax(0,1fr)}.card{min-height:250px}
+  .fields{grid-template-columns:minmax(0,1fr)}.pane,.done{padding:24px 18px}.nav-b{padding:0 18px 24px}.hint{padding:0 18px 18px}
+  .m{padding:26px;min-height:400px}.m .m-art{width:36%;right:20px;bottom:20px}.m>*:not(.m-art){max-width:60%}
+  .hero .c3{width:70px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .mq{animation:none}
+}
+</style>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Two Beauty"><img src="data:image/jpeg;base64,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" alt="" width="40" height="40"><span>TWO BEAUTY</span></a>
+    <nav class="links" aria-label="Menu">
+      <a href="#top" data-i="nav_home"></a>
+      <a href="#hizmetler" data-i="nav_services"></a>
+      <a href="#studyo" data-i="nav_studio"></a>
+      <a href="#ustalar" data-i="nav_team"></a>
+      <a href="#gorunumler" data-i="nav_looks"></a>
+      <a href="#randevu" data-i="nav_book"></a>
+    </nav>
+    <div class="ctrl">
+      <div class="seg" role="group" aria-label="Language">
+        <button type="button" data-lang="tr" aria-pressed="true">TR</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        <button type="button" data-lang="ru" aria-pressed="false">RU</button>
+      </div>
+      <button class="icon-btn" id="themeBtn" type="button" aria-label="Theme"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 2a6 6 0 0 1 0 12z" fill="currentColor"/></svg></button>
+      <a class="btn sm" href="#randevu" data-i="cta_nav"></a>
+    </div>
+  </div>
+  <div class="prog" id="prog"></div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <i class="circ c1"></i><i class="circ c2"></i><i class="circ c3"></i>
+  <div class="wrap hero-grid">
+   <div class="hero-l">
+    <p class="hi"><i>✦</i><span data-i="hi"></span></p>
+    <h1 class="mega disp" id="mega" aria-label="Two Beauty"></h1>
+    <p class="sub" id="sub"></p>
+    <div class="hero-foot">
+      <a class="btn" href="#randevu" data-i="cta_book"></a>
+      <span class="chip-i"><b>✦</b><span><span data-count="1058">1058</span> <span data-i="followers"></span> · @twobeauty33</span></span>
+    </div>
+   </div>
+   <div class="hero-art"><div class="arch a2" id="hA2"></div><div class="arch a3" id="hA3"></div><div class="arch a1" id="hA1"></div>
+  <a class="badge" href="#randevu" aria-label="Randevu">
+    <svg class="rot" viewBox="0 0 200 200" aria-hidden="true"><defs><path id="circP" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><text><textPath href="#circP" textLength="486" lengthAdjust="spacing">RANDEVU AL ✦ BOOK NOW ✦ ЗАПИСАТЬСЯ ✦ </textPath></text></svg>
+    <span class="core"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span>
+  </a></div>
+  </div>
+</section>
+
+<div class="band" aria-hidden="true">
+  <div class="mq" id="mq1"></div>
+  <div class="mq rev" id="mq2"></div>
+</div>
+
+<section class="sec" id="hizmetler">
+  <div class="wrap">
+    <div class="sec-head will">
+      <p class="eyebrow" data-i="sv_eyebrow"></p>
+      <h2 class="disp" data-i="sv_title"></h2>
+      <p data-i="sv_lead"></p>
+    </div>
+    <div class="cards will" id="cards"></div>
+  </div>
+</section>
+
+<section class="sec tryon" id="renkler">
+  <div class="wrap try">
+    <div class="will">
+      <p class="eyebrow" data-i="co_eyebrow"></p>
+      <h2 class="disp" style="font-size:clamp(40px,6vw,80px);margin:18px 0" data-i="co_title"></h2>
+      <p style="color:var(--muted);max-width:48ch" data-i="co_lead"></p>
+      <div class="shades" id="shades" role="group"></div>
+      <p class="shade-name"><small data-i="co_sel"></small><span id="shadeName"></span></p>
+      <button class="btn" type="button" id="shadeAdd" data-i="co_cta"></button>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="studyo">
+  <div class="wrap studio">
+    <div class="will">
+      <p class="eyebrow" style="margin-bottom:26px" data-i="st_eyebrow"></p>
+      <p class="statement" id="statement"></p>
+      <div class="tri" id="tri"></div>
+    </div>
+    <div class="blocks will" id="blocks"></div>
+  </div>
+</section>
+
+<div class="stats"><div class="wrap">
+  <div><b data-count="1058">0</b><span data-i="stat_followers"></span></div>
+  <div><b data-count="109">0</b><span data-i="stat_posts"></span></div>
+  <div><b data-count="7">0</b><span data-i="stat_services"></span></div>
+  <div><b data-count="2">0</b><span data-i="stat_artists"></span></div>
+</div></div>
+
+<section class="sec" id="ustalar">
+  <div class="wrap">
+    <div class="sec-head will">
+      <p class="eyebrow" data-i="tm_eyebrow"></p>
+      <h2 class="disp" data-i="tm_title"></h2>
+      <p data-i="tm_lead"></p>
+    </div>
+    <div class="duo will">
+      <article class="m"><div class="m-art arch" id="artO"></div>
+        <p class="role" data-i="ma_o_role"></p>
+        <div><h3>Olga Nail</h3><p class="at">@olga.nail.mersin</p></div>
+        <a class="btn line" href="https://www.instagram.com/olga.nail.mersin" target="_blank" rel="noopener" data-i="ig_open"></a>
+      </article>
+      <article class="m dark"><div class="m-art arch" id="artZ"></div>
+        <p class="role" data-i="ma_z_role"></p>
+        <div><h3>Phi Brows<br>Özlem</h3><p class="at">@phibrows_ozlemfideli</p></div>
+        <a class="btn" href="https://www.instagram.com/phibrows_ozlemfideli" target="_blank" rel="noopener" data-i="ig_open"></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="gorunumler" style="background:var(--bg2);border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="looks-head will">
+      <div class="sec-head">
+        <p class="eyebrow" data-i="lk_eyebrow"></p>
+        <h2 class="disp">Insta <span class="it">Glam</span></h2>
+        <p data-i="lk_lead"></p>
+      </div>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center">
+        <a class="btn" href="https://www.instagram.com/twobeauty33" target="_blank" rel="noopener" data-i="lk_follow"></a>
+        <div class="nav-arr">
+          <button type="button" id="stripL" aria-label="Previous"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12H4M10 6l-6 6 6 6"/></svg></button>
+          <button type="button" id="stripR" aria-label="Next"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="up" id="upBar" hidden>
+      <select id="upCat" aria-label="Category"></select>
+      <label class="btn sm" for="upFile" data-i="ga_add"></label>
+      <input id="upFile" type="file" accept="image/png,image/jpeg,image/webp,image/gif" multiple hidden>
+      <span id="upMsg" style="color:var(--muted);font-size:14px" role="status"></span>
+    </div>
+    <div class="strip" id="strip"></div>
+  </div>
+</section>
+
+<section class="sec loc" id="konum">
+  <div class="wrap loc-grid">
+    <div class="will">
+      <p class="eyebrow" data-i="lc_eyebrow"></p>
+      <h2 class="disp" data-i="lc_title"></h2>
+      <p class="addr" id="addr"></p>
+      <div class="btns" id="locBtns"></div>
+    </div>
+    <div class="will">
+      <p class="hours-h" data-i="lc_hours"></p>
+      <ul class="hours" id="hours"></ul>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="randevu">
+  <div class="wrap">
+    <div class="sec-head will">
+      <p class="eyebrow" data-i="bk_eyebrow"></p>
+      <h2 class="disp" data-i="bk_title"></h2>
+      <p data-i="bk_lead"></p>
+    </div>
+    <div class="bk-card will" id="bkCard">
+      <div id="bkWiz">
+        <ol class="steps" id="steps"></ol>
+        <div class="pane" id="pane"></div>
+        <p class="hint" data-i="bk_hint"></p>
+        <div class="nav-b">
+          <button class="btn line" type="button" id="bBack" data-i="back"></button>
+          <button class="btn" type="button" id="bNext" data-i="next"></button>
+        </div>
+      </div>
+      <div class="done" id="bookDone" hidden></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec staff" id="yonetim" hidden>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow" data-i="sf_eyebrow"></p>
+      <h2 class="disp" data-i="sf_title"></h2>
+      <p data-i="sf_lead"></p>
+    </div>
+    <div class="tabs" id="sfTabs"></div>
+    <div class="sf-list" id="sfList"></div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div><div class="big">Two<br>Beauty</div><p data-i="ft_p"></p></div>
+    <ul>
+      <li><a href="https://www.instagram.com/twobeauty33" target="_blank" rel="noopener"><span>@twobeauty33</span><small>Instagram</small></a></li>
+      <li><a href="https://www.instagram.com/olga.nail.mersin" target="_blank" rel="noopener"><span>@olga.nail.mersin</span><small data-i="ma_o_role"></small></a></li>
+      <li><a href="https://www.instagram.com/phibrows_ozlemfideli" target="_blank" rel="noopener"><span>@phibrows_ozlemfideli</span><small data-i="ma_z_role"></small></a></li>
+    </ul>
+    <p class="fine">© 2026 Two Beauty · Mersin</p>
+  </div>
+</footer>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="gSkinF" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#E3B49B"/><stop offset=".28" stop-color="#F6D9C6"/><stop offset=".62" stop-color="#F1CDB7"/><stop offset="1" stop-color="#DDA88E"/></linearGradient>
+    <linearGradient id="gSkinP" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F5D6C2"/><stop offset=".55" stop-color="#EFC8B1"/><stop offset="1" stop-color="#E2B199"/></linearGradient>
+    <linearGradient id="gFade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--bg2);stop-opacity:0"/><stop offset=".55" style="stop-color:var(--bg2);stop-opacity:1"/></linearGradient>
+    <linearGradient id="sh-nude" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EBD0BE"/><stop offset="1" stop-color="#D6AA92"/></linearGradient>
+    <linearGradient id="sh-milk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7DEE2"/><stop offset="1" stop-color="#E4B1BD"/></linearGradient>
+    <linearGradient id="sh-cherry" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D92B44"/><stop offset="1" stop-color="#8C1327"/></linearGradient>
+    <linearGradient id="sh-wine" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#74183A"/><stop offset="1" stop-color="#3A0B1C"/></linearGradient>
+    <linearGradient id="sh-chrome" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F6F6F8"/><stop offset=".35" stop-color="#9DA2AE"/><stop offset=".6" stop-color="#FFFFFF"/><stop offset="1" stop-color="#7C8190"/></linearGradient>
+    <linearGradient id="sh-cateye" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1B1428"/><stop offset=".34" stop-color="#3B2A5B"/><stop offset=".5" stop-color="#C2A6F7"/><stop offset=".66" stop-color="#3B2A5B"/><stop offset="1" stop-color="#1B1428"/></linearGradient>
+    <linearGradient id="sh-french" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".24" stop-color="#FFFFFF"/><stop offset=".25" stop-color="#EEC9BC"/><stop offset="1" stop-color="#DDB0A1"/></linearGradient>
+    <linearGradient id="gBgA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FBF1DC"/><stop offset="1" stop-color="#E2C797"/></linearGradient>
+    <linearGradient id="gBgB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F7E4DC"/><stop offset="1" stop-color="#D9B0A0"/></linearGradient>
+    <linearGradient id="gBgC" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3A2D20"/><stop offset="1" stop-color="#120D08"/></linearGradient>
+    <linearGradient id="gBgD" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFDF6"/><stop offset="1" stop-color="#EBDCBF"/></linearGradient>
+    <linearGradient id="gGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F0DDA8"/><stop offset=".5" stop-color="#B8935A"/><stop offset="1" stop-color="#7E5E2E"/></linearGradient>
+    <radialGradient id="gIris" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#E5C07C"/><stop offset=".55" stop-color="#8A5A26"/><stop offset="1" stop-color="#2A160A"/></radialGradient>
+    <linearGradient id="gDrop" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".6" stop-color="#F6DDD2"/><stop offset="1" stop-color="#D9B77E"/></linearGradient>
+    <clipPath id="clipEye"><path d="M55 235Q150 150 245 235Q150 300 55 235Z"/></clipPath>
+    <linearGradient id="sh-noir" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#34343A"/><stop offset="1" stop-color="#0B0B0D"/></linearGradient>
+  </defs>
+</svg>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------- editable settings ---------- */
+var CONFIG={
+  endpoint:"",                  // Google Apps Script web-app URL (see apps-script/Code.gs). Empty = no calendar link.
+  whatsapp:"",                  // digits only, e.g. "905551112233". Empty hides the WhatsApp button.
+  phone:"",                     // shown with a Call button when filled, e.g. "+90 555 111 22 33"
+  address:"",                   // street address shown in the Location section
+  maps:"",                      // Google Maps link for the Directions button
+  instagramDM:"https://ig.me/m/twobeauty33",
+  open:10, close:19, closedDays:[0], horizon:14, leadMinutes:30,
+  photos:[]                     // for a static site: [{src:"images/1.jpg",cat:"nail",tag:"trend"}]
+};
+
+var T={
+tr:{
+nav_home:"Ana Sayfa",nav_services:"Hizmetler",nav_studio:"Stüdyo",nav_team:"Uzmanlarımız",nav_looks:"Görünümler",nav_book:"Randevu",cta_nav:"Randevu Al",
+hi:"Hoş geldiniz · Two Beauty",h_a:"İki usta.",h_b:"Tek stüdyo.",h_sub:["Kirpik.","Tırnak.","Kaş.","Cilt."],cta_book:"Randevunu al",followers:"takipçi",
+sv_eyebrow:"Hizmetler",sv_title:"Yedi hizmet. İki usta.",sv_lead:"Bir hizmet seçin, randevu formu sizin için hazır gelsin.",sv_book:"Randevu al",sv_cta_t:"Sıra sizde",
+svc_lash:"İpek Kirpik",svc_gel:"Jel Tırnak",svc_lami:"Kaş-Kirpik Laminasyon",svc_mani:"Manikür",svc_pedi:"Pedikür",svc_polish:"Kalıcı Oje",svc_skin:"Cilt Bakımı",
+sd_lash:"Doğal bakışı hafif ve ince ipek kirpiklerle tamamlar.",sd_gel:"Şeklini ve rengini sizin seçtiğiniz, parlak ve dayanıklı tırnaklar.",sd_lami:"Kaş ve kirpikleri şekillendirir; daha dolgun ve düzenli bir görünüm verir.",sd_mani:"Tırnak ve kütikül bakımıyla ellerinize temiz, düzenli bir görünüm.",sd_pedi:"Ayak bakımı, tırnak şekillendirme ve nemlendirme.",sd_polish:"Uzun süre parlaklığını koruyan kalıcı oje uygulaması.",sd_skin:"Cildi temizleyen ve nemlendiren, yüze dinlenmiş bir görünüm kazandıran bakım.",
+co_eyebrow:"Sezonun rengi",co_title:"Tırnağınızda nasıl durur?",co_lead:"Bir renk seçin. Beğendiğinizi randevu notunuza ekleyelim.",co_sel:"Seçili renk",co_cta:"Bu rengi randevuma ekle",
+sh_nude:"Nude",sh_milk:"Süt Pembesi",sh_cherry:"Kiraz Kırmızısı",sh_wine:"Bordo",sh_chrome:"Krom",sh_cateye:"Cat Eye",sh_french:"French",sh_noir:"Siyah",colorWord:"Renk",
+st_eyebrow:"Stüdyo",st_a:"Kirpikten tırnağa, kaştan cilde:",st_b:"iki usta, tek çatı.",
+b1t:"İki usta",b1d:"Olga Nail ve Phi Brows, aynı stüdyoda.",b2t:"Yedi hizmet",b2d:"İpek kirpikten cilt bakımına, ihtiyacınız olan her şey bir arada.",b3t:"Randevuyla",b3d:"Hizmeti, ustayı ve saati siz seçin; salon onaylasın.",b4t:"Mersin'de",b4d:"Son çalışmaları Instagram hesaplarımızdan takip edin.",
+stat_followers:"Takipçi",stat_posts:"Paylaşım",stat_services:"Hizmet",stat_artists:"Usta",
+tm_eyebrow:"Uzmanlarımız",tm_title:"İki isim",tm_lead:"Olga ve Özlem çalışmalarını kendi hesaplarında da paylaşıyor.",ma_o_role:"Tırnak sanatı",ma_z_role:"Kaş ve kirpik",ig_open:"Instagram profili",
+lk_eyebrow:"Görünümler",lk_lead:"Tırnak, kirpik, kaş ve cilt çalışmalarımızın tamamı Instagram'da.",lk_follow:"Instagram'da takip et",tag_trend:"Trend",tag_new:"Yeni",
+cat_nail:"Tırnak",cat_lash:"Kirpik",cat_brow:"Kaş",cat_skin:"Cilt",ga_add:"Fotoğraf ekle",ga_up:"Yükleniyor…",ga_ok:"Eklendi",ga_fail:"Yüklenemedi. JPG, PNG veya WebP deneyin.",ga_del:"Sil",ga_sure:"Emin misiniz?",
+lc_eyebrow:"Konum & saatler",lc_title:"Bizi bulun",lc_city:"Mersin",lc_dm:"Instagram'dan yazın",lc_call:"Ara",lc_dir:"Yol tarifi",lc_hours:"Çalışma saatleri",lc_closed:"Kapalı",
+bk_eyebrow:"Randevu",bk_title:"Yerinizi ayırın",bk_lead:"Beş kısa adım. Talebiniz salona ulaşır ve onaylandığında kesinleşir.",
+w1:"Hizmet",w2:"Usta",w3:"Tarih & Saat",w4:"Bilgilerin",w5:"Onay",h1:"Hangi hizmet?",h2:"Hangi usta?",h3:"Ne zaman?",h4:"Bilgilerin",h5:"Son bir bakış",
+back:"Geri",next:"Devam",any:"Fark etmez",f_name:"Ad soyad",f_phone:"Telefon",f_note:"Not (isteğe bağlı)",ph_name:"Adınız",ph_phone:"05xx xxx xx xx",ph_note:"Renk, model, özel istek…",
+bk_hint:"Seçtiğiniz saat bir talep olarak iletilir. Salon onayladığında randevunuz kesinleşir.",bk_confirm:"Randevuyu onayla",
+tk_service:"Hizmet",tk_master:"Usta",tk_date:"Tarih",tk_time:"Saat",tk_name:"Ad",
+e_svc:"Bir hizmet seçin.",e_when:"Tarih ve saat seçin.",e_name:"Adınızı yazın.",e_phone:"Geçerli bir telefon numarası yazın.",timesNone:"Bu gün için uygun saat kalmadı.",pickDate:"Önce bir tarih seçin.",
+d_saved_t:"Talebiniz alındı",d_saved_p:"Salon onayladığında randevunuz kesinleşir. İsterseniz takviminize ekleyebilir veya Instagram'dan yazabilirsiniz.",
+d_send_t:"Son adım: salona iletin",d_send_p:"Özeti kopyalayıp Instagram'dan (veya WhatsApp'tan) gönderin. Salon saati onayladığında randevunuz kesinleşir.",
+d_copy:"Özeti kopyala",d_copied:"Kopyalandı",d_ig:"Instagram'ı aç",d_wa:"WhatsApp'tan onayla",d_cal:"Takvime ekle",d_new:"Yeni randevu",
+d_taken:"Bu saat az önce doldu. Lütfen başka bir saat seçin.",msg_hi:"Merhaba Two Beauty! Randevu talep ediyorum:",
+sf_eyebrow:"Yönetim",sf_title:"Randevular",sf_lead:"Bu bölümü yalnızca siz görürsünüz. Telefondan veya mesajla gelen randevuları da yukarıdaki formdan ekleyebilirsiniz.",
+sf_pending:"Bekleyen",sf_confirmed:"Onaylı",sf_all:"Tümü",sf_empty:"Yaklaşan randevu yok.",sf_confirm:"Onayla",sf_cancel:"İptal et",sf_delete:"Sil",sf_copy:"Telefonu kopyala",
+st_pending:"Bekliyor",st_confirmed:"Onaylı",st_cancelled:"İptal",ft_p:"Mersin'de güzellik stüdyosu."
+},
+en:{
+nav_home:"Home",nav_services:"Services",nav_studio:"Studio",nav_team:"Artists",nav_looks:"Looks",nav_book:"Book",cta_nav:"Book now",
+hi:"Welcome · Two Beauty",h_a:"Two artists.",h_b:"One studio.",h_sub:["Lashes.","Nails.","Brows.","Skin."],cta_book:"Book now",followers:"followers",
+sv_eyebrow:"Services",sv_title:"Seven services. Two artists.",sv_lead:"Pick a service and the booking form opens ready for it.",sv_book:"Book",sv_cta_t:"Your turn",
+svc_lash:"Silk Lashes",svc_gel:"Gel Nails",svc_lami:"Brow & Lash Lamination",svc_mani:"Manicure",svc_pedi:"Pedicure",svc_polish:"Gel Polish",svc_skin:"Skin Care",
+sd_lash:"Light, fine silk lashes that complete a natural look.",sd_gel:"Glossy, long-lasting nails in the shape and colour you choose.",sd_lami:"Shapes brows and lashes for a fuller, neater look.",sd_mani:"Nail and cuticle care for clean, tidy hands.",sd_pedi:"Foot care, nail shaping and moisturising.",sd_polish:"Long-wear polish that keeps its shine.",sd_skin:"Cleansing and moisturising care for a rested-looking face.",
+co_eyebrow:"Shade of the season",co_title:"How will it look on you?",co_lead:"Pick a shade. We can add your favourite to your booking note.",co_sel:"Selected shade",co_cta:"Add this shade to my booking",
+sh_nude:"Nude",sh_milk:"Milky Pink",sh_cherry:"Cherry Red",sh_wine:"Burgundy",sh_chrome:"Chrome",sh_cateye:"Cat Eye",sh_french:"French",sh_noir:"Black",colorWord:"Shade",
+st_eyebrow:"Studio",st_a:"From lashes to nails, brows to skin:",st_b:"two artists, one roof.",
+b1t:"Two artists",b1d:"Olga Nail and Phi Brows, in the same studio.",b2t:"Seven services",b2d:"From silk lashes to skin care, everything in one place.",b3t:"By appointment",b3d:"Choose the service, artist and time; the studio confirms.",b4t:"In Mersin",b4d:"Follow our latest work on Instagram.",
+stat_followers:"Followers",stat_posts:"Posts",stat_services:"Services",stat_artists:"Artists",
+tm_eyebrow:"Our artists",tm_title:"Two names",tm_lead:"Olga and Özlem also share their work on their own accounts.",ma_o_role:"Nail art",ma_z_role:"Brows and lashes",ig_open:"Instagram profile",
+lk_eyebrow:"Looks",lk_lead:"Our nail, lash, brow and skin work is all on Instagram.",lk_follow:"Follow on Instagram",tag_trend:"Trend",tag_new:"New",
+cat_nail:"Nails",cat_lash:"Lashes",cat_brow:"Brows",cat_skin:"Skin",ga_add:"Add photos",ga_up:"Uploading…",ga_ok:"Added",ga_fail:"Upload failed. Try JPG, PNG or WebP.",ga_del:"Delete",ga_sure:"Sure?",
+lc_eyebrow:"Location & hours",lc_title:"Find us",lc_city:"Mersin",lc_dm:"Message us on Instagram",lc_call:"Call",lc_dir:"Directions",lc_hours:"Working hours",lc_closed:"Closed",
+bk_eyebrow:"Booking",bk_title:"Reserve your spot",bk_lead:"Five short steps. Your request reaches the studio and is confirmed once they accept it.",
+w1:"Service",w2:"Artist",w3:"Date & Time",w4:"Details",w5:"Confirm",h1:"Which service?",h2:"Which artist?",h3:"When?",h4:"Your details",h5:"One last look",
+back:"Back",next:"Continue",any:"No preference",f_name:"Full name",f_phone:"Phone",f_note:"Note (optional)",ph_name:"Your name",ph_phone:"+90 5xx xxx xx xx",ph_note:"Colour, style, special request…",
+bk_hint:"Your chosen time is sent as a request. It is confirmed once the studio accepts it.",bk_confirm:"Confirm booking",
+tk_service:"Service",tk_master:"Artist",tk_date:"Date",tk_time:"Time",tk_name:"Name",
+e_svc:"Choose a service.",e_when:"Choose a date and time.",e_name:"Enter your name.",e_phone:"Enter a valid phone number.",timesNone:"No times left on this day.",pickDate:"Pick a date first.",
+d_saved_t:"Request received",d_saved_p:"You are confirmed once the studio accepts it. You can add it to your calendar or message them on Instagram.",
+d_send_t:"Last step: send it to the studio",d_send_p:"Copy the summary and send it on Instagram (or WhatsApp). You are confirmed once the studio accepts the time.",
+d_copy:"Copy summary",d_copied:"Copied",d_ig:"Open Instagram",d_wa:"Confirm on WhatsApp",d_cal:"Add to calendar",d_new:"New booking",
+d_taken:"That time was just taken. Please choose another.",msg_hi:"Hello Two Beauty! I would like to book:",
+sf_eyebrow:"Manage",sf_title:"Bookings",sf_lead:"Only you can see this section. Add bookings that come in by phone or message with the form above.",
+sf_pending:"Pending",sf_confirmed:"Confirmed",sf_all:"All",sf_empty:"No upcoming bookings.",sf_confirm:"Confirm",sf_cancel:"Cancel",sf_delete:"Delete",sf_copy:"Copy phone",
+st_pending:"Pending",st_confirmed:"Confirmed",st_cancelled:"Cancelled",ft_p:"A beauty studio in Mersin."
+},
+ru:{
+nav_home:"Главная",nav_services:"Услуги",nav_studio:"Студия",nav_team:"Мастера",nav_looks:"Образы",nav_book:"Запись",cta_nav:"Записаться",
+hi:"Добро пожаловать · Two Beauty",h_a:"Два мастера.",h_b:"Одна студия.",h_sub:["Ресницы.","Ногти.","Брови.","Кожа."],cta_book:"Записаться",followers:"подписчиков",
+sv_eyebrow:"Услуги",sv_title:"Семь услуг. Два мастера.",sv_lead:"Выберите услугу, и форма записи откроется уже заполненной.",sv_book:"Записаться",sv_cta_t:"Ваша очередь",
+svc_lash:"Шёлковые ресницы",svc_gel:"Гелевые ногти",svc_lami:"Ламинирование бровей и ресниц",svc_mani:"Маникюр",svc_pedi:"Педикюр",svc_polish:"Стойкое покрытие",svc_skin:"Уход за кожей",
+sd_lash:"Лёгкие тонкие ресницы, которые подчёркивают естественный взгляд.",sd_gel:"Блестящие и прочные ногти той формы и цвета, которые выберете вы.",sd_lami:"Придаёт бровям и ресницам форму, делает их гуще и аккуратнее.",sd_mani:"Уход за ногтями и кутикулой: чистые и аккуратные руки.",sd_pedi:"Уход за стопами, форма ногтей и увлажнение.",sd_polish:"Стойкое покрытие, которое долго сохраняет блеск.",sd_skin:"Очищение и увлажнение для отдохнувшего вида лица.",
+co_eyebrow:"Цвет сезона",co_title:"Как это выглядит на вас?",co_lead:"Выберите оттенок. Любимый цвет добавим в заметку к записи.",co_sel:"Выбранный оттенок",co_cta:"Добавить цвет в запись",
+sh_nude:"Нюд",sh_milk:"Молочно-розовый",sh_cherry:"Вишнёвый",sh_wine:"Бордо",sh_chrome:"Хром",sh_cateye:"Кошачий глаз",sh_french:"Френч",sh_noir:"Чёрный",colorWord:"Цвет",
+st_eyebrow:"Студия",st_a:"От ресниц до ногтей, от бровей до кожи:",st_b:"два мастера, одна студия.",
+b1t:"Два мастера",b1d:"Olga Nail и Phi Brows в одной студии.",b2t:"Семь услуг",b2d:"От шёлковых ресниц до ухода за кожей, всё в одном месте.",b3t:"По записи",b3d:"Выберите услугу, мастера и время, студия подтвердит.",b4t:"В Мерсине",b4d:"Свежие работы смотрите в нашем Instagram.",
+stat_followers:"Подписчиков",stat_posts:"Публикаций",stat_services:"Услуг",stat_artists:"Мастера",
+tm_eyebrow:"Наши мастера",tm_title:"Два имени",tm_lead:"Ольга и Озлем показывают свои работы и на личных страницах.",ma_o_role:"Ногтевой дизайн",ma_z_role:"Брови и ресницы",ig_open:"Профиль в Instagram",
+lk_eyebrow:"Образы",lk_lead:"Все наши работы по ногтям, ресницам, бровям и коже есть в Instagram.",lk_follow:"Подписаться в Instagram",tag_trend:"Тренд",tag_new:"Новое",
+cat_nail:"Ногти",cat_lash:"Ресницы",cat_brow:"Брови",cat_skin:"Кожа",ga_add:"Добавить фото",ga_up:"Загрузка…",ga_ok:"Добавлено",ga_fail:"Не удалось загрузить. Попробуйте JPG, PNG или WebP.",ga_del:"Удалить",ga_sure:"Точно?",
+lc_eyebrow:"Адрес и часы",lc_title:"Найти нас",lc_city:"Мерсин",lc_dm:"Напишите в Instagram",lc_call:"Позвонить",lc_dir:"Как добраться",lc_hours:"Часы работы",lc_closed:"Закрыто",
+bk_eyebrow:"Запись",bk_title:"Забронируйте время",bk_lead:"Пять коротких шагов. Заявка уйдёт в студию и подтвердится, когда её примут.",
+w1:"Услуга",w2:"Мастер",w3:"Дата и время",w4:"Данные",w5:"Готово",h1:"Какая услуга?",h2:"Какой мастер?",h3:"Когда?",h4:"Ваши данные",h5:"Последний взгляд",
+back:"Назад",next:"Далее",any:"Без разницы",f_name:"Имя и фамилия",f_phone:"Телефон",f_note:"Заметка (по желанию)",ph_name:"Ваше имя",ph_phone:"+90 5xx xxx xx xx",ph_note:"Цвет, форма, пожелания…",
+bk_hint:"Выбранное время отправляется как заявка. Запись подтверждается, когда студия её примет.",bk_confirm:"Подтвердить запись",
+tk_service:"Услуга",tk_master:"Мастер",tk_date:"Дата",tk_time:"Время",tk_name:"Имя",
+e_svc:"Выберите услугу.",e_when:"Выберите дату и время.",e_name:"Введите имя.",e_phone:"Введите корректный номер телефона.",timesNone:"На этот день свободного времени нет.",pickDate:"Сначала выберите дату.",
+d_saved_t:"Заявка получена",d_saved_p:"Запись подтвердится, когда студия её примет. Можно добавить в календарь или написать им в Instagram.",
+d_send_t:"Последний шаг: отправьте в студию",d_send_p:"Скопируйте сводку и отправьте её в Instagram (или WhatsApp). Запись подтвердится, когда студия примет время.",
+d_copy:"Скопировать сводку",d_copied:"Скопировано",d_ig:"Открыть Instagram",d_wa:"Подтвердить в WhatsApp",d_cal:"В календарь",d_new:"Новая запись",
+d_taken:"Это время только что заняли. Выберите другое.",msg_hi:"Здравствуйте, Two Beauty! Хочу записаться:",
+sf_eyebrow:"Управление",sf_title:"Записи",sf_lead:"Этот раздел видите только вы. Записи по телефону или в сообщениях добавляйте той же формой выше.",
+sf_pending:"Ожидают",sf_confirmed:"Подтверждены",sf_all:"Все",sf_empty:"Ближайших записей нет.",sf_confirm:"Подтвердить",sf_cancel:"Отменить",sf_delete:"Удалить",sf_copy:"Копировать номер",
+st_pending:"Ожидает",st_confirmed:"Подтверждена",st_cancelled:"Отменена",ft_p:"Студия красоты в Мерсине."
+}};
+var LOC={tr:"tr-TR",en:"en-GB",ru:"ru-RU"};
+
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var lang="tr";
+var t=function(k){return (T[lang]&&T[lang][k])||T.tr[k]||k};
+var esc=function(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})};
+var pad=function(n){return (n<10?"0":"")+n};
+var ymd=function(d){return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())};
+var parseYmd=function(s){var p=s.split("-");return new Date(+p[0],+p[1]-1,+p[2])};
+var fmtDate=function(s,o){return new Intl.DateTimeFormat(LOC[lang],o||{weekday:"long",day:"numeric",month:"long"}).format(parseYmd(s))};
+var store={get:function(k){try{return localStorage.getItem(k)}catch(e){return null}},set:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+var TODAY=ymd(new Date());
+
+var ICON={
+lash:'<path d="M6 36Q32 14 58 36"/><path d="M10 40Q32 54 54 40"/><circle cx="32" cy="36" r="6"/><path d="M14 29L9 22M22 24L19 15M32 21V11M42 24L45 15M50 29L55 22"/>',
+gel:'<path d="M22 60V28Q22 8 32 8Q42 8 42 28V60"/><path d="M26 30Q26 17 32 15Q38 17 38 30Q38 35 32 35Q26 35 26 30Z"/><path d="M30 20Q29 24 29 28"/><path d="M12 60H52"/>',
+lami:'<path d="M6 40Q28 12 58 30"/><path d="M14 33L11 26M23 26L21 19M33 22L32 15M43 24L44 17M52 28L56 23"/><path d="M44 42L46.5 48.5L53 51L46.5 53.5L44 60L41.5 53.5L35 51L41.5 48.5Z"/>',
+mani:'<path d="M14 50L44 14L52 21L22 57Z"/><path d="M22 41L28 46M28 34L34 39M36 24L41 29"/><path d="M52 6L53.5 10L57.5 11.5L53.5 13L52 17L50.5 13L46.5 11.5L50.5 10Z"/>',
+pedi:'<path d="M32 52Q18 40 24 22Q32 30 32 52"/><path d="M32 52Q46 40 40 22Q32 30 32 52"/><path d="M32 52Q22 34 32 12Q42 34 32 52"/><path d="M10 44Q20 56 32 52Q44 56 54 44"/>',
+polish:'<path d="M18 34a4 4 0 0 1 4-4h20a4 4 0 0 1 4 4v18a4 4 0 0 1-4 4H22a4 4 0 0 1-4-4Z"/><path d="M27 30v-5h10v5"/><path d="M28 25V9a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v16"/><path d="M24 42Q32 37 40 45"/>',
+skin:'<path d="M32 6Q50 28 50 40A18 18 0 0 1 14 40Q14 28 32 6Z"/><path d="M24 42Q24 50 31 53"/><path d="M52 14L53.5 18L57.5 19.5L53.5 21L52 25L50.5 21L46.5 19.5L50.5 18Z"/>'
+};
+var svg=function(k,cls){return '<svg class="ic '+(cls||"")+'" viewBox="0 0 64 64" aria-hidden="true">'+ICON[k].replace(/<(path|circle) /g,'<$1 pathLength="1" ')+'</svg>'};
+var SVC=["lash","gel","lami","mani","pedi","polish","skin"];
+var ARROW='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg>';
+
+var S={service:"",master:"any",date:"",time:"",name:"",phone:"",note:""};
+var step=1,LAST=null;
+var DB=null,USER=null,ASSETS=null,isStaff=false,canWrite=null,uid=null;
+var HOLDER="tab-"+Math.random().toString(36).slice(2,10);
+var TAKEN={},GAL=[],BK=[],sfFilter="pending",armed="";
+
+
+/* ---------- illustrations in the logo palette (cream, champagne gold, warm black) ---------- */
+function sparkle(x,y,r,f){return '<path d="M'+x+' '+(y-r)+'Q'+x+' '+y+' '+(x+r)+' '+y+'Q'+x+' '+y+' '+x+' '+(y+r)+'Q'+x+' '+y+' '+(x-r)+' '+y+'Q'+x+' '+y+' '+x+' '+(y-r)+'Z" fill="'+(f||"url(#gGold)")+'"/>'}
+function artWrap(bg,inner){return '<svg class="art" viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="300" height="400" fill="url(#gBg'+bg+')"/><circle cx="150" cy="210" r="118" fill="none" stroke="url(#gGold)" stroke-width="1" opacity=".55"/><circle cx="150" cy="210" r="138" fill="none" stroke="url(#gGold)" stroke-width=".6" opacity=".4"/>'+inner+'</svg>'}
+function artLash(){
+  var o="",i,t,p0=[55,235],c=[150,150],p2=[245,235];
+  for(i=0;i<=18;i++){
+    t=i/18;var x=(1-t)*(1-t)*p0[0]+2*(1-t)*t*c[0]+t*t*p2[0],y=(1-t)*(1-t)*p0[1]+2*(1-t)*t*c[1]+t*t*p2[1];
+    var tx=2*(1-t)*(c[0]-p0[0])+2*t*(p2[0]-c[0]),ty=2*(1-t)*(c[1]-p0[1])+2*t*(p2[1]-c[1]),l=Math.sqrt(tx*tx+ty*ty);tx/=l;ty/=l;
+    var nx=ty,ny=-tx,k=(t-.5)*1.5,dx=nx+k*tx,dy=ny+k*ty,d=Math.sqrt(dx*dx+dy*dy);dx/=d;dy/=d;
+    var len=24+16*Math.sin(Math.PI*t),ex=x+dx*len,ey=y+dy*len;
+    o+='<path d="M'+x.toFixed(1)+' '+y.toFixed(1)+'Q'+(x+dx*len*.5+tx*7).toFixed(1)+' '+(y+dy*len*.5+ty*7).toFixed(1)+' '+ex.toFixed(1)+' '+ey.toFixed(1)+'" stroke="#0A0A0A" stroke-width="3.4" fill="none" stroke-linecap="round"/>';
+  }
+  return artWrap("A",
+   '<path d="M46 160Q120 96 258 126Q128 114 52 178Z" fill="#3A2615"/>'+
+   '<path d="M55 235Q150 150 245 235Q150 300 55 235Z" fill="#FFFDF8"/>'+
+   '<g clip-path="url(#clipEye)"><circle cx="150" cy="240" r="46" fill="url(#gIris)"/><circle cx="150" cy="240" r="17" fill="#120A04"/><circle cx="164" cy="226" r="8" fill="#fff" opacity=".9"/></g>'+
+   '<path d="M55 235Q150 150 245 235" fill="none" stroke="#0A0A0A" stroke-width="5" stroke-linecap="round"/>'+
+   '<path d="M55 235Q150 300 245 235" fill="none" stroke="#0A0A0A" stroke-width="2" opacity=".5"/>'+o+sparkle(240,86,14)+sparkle(66,320,9));
+}
+function artNails(v){
+  var sh=v==="b"?["milk","nude","milk","nude","french"]:["nude","cherry","french","wine","chrome"],ang=[-30,-15,0,15,30],hs=[190,226,242,226,190],o="";
+  for(var i=0;i<5;i++){var h=hs[i];
+    o+='<g transform="translate(150 440) rotate('+ang[i]+')"><rect x="-19" y="'+(-h)+'" width="38" height="'+(h+30)+'" rx="19" fill="#EBCBB2"/><path d="M-14 '+(-h+74)+'L-14 '+(-h+36)+'Q-14 '+(-h+8)+' 0 '+(-h+6)+'Q14 '+(-h+8)+' 14 '+(-h+36)+'L14 '+(-h+74)+'Q0 '+(-h+84)+' -14 '+(-h+74)+'Z" fill="url(#sh-'+sh[i]+')" stroke="rgba(10,10,10,.25)" stroke-width="1"/><ellipse cx="-5" cy="'+(-h+34)+'" rx="2.6" ry="10" fill="#fff" opacity=".65"/></g>';}
+  return artWrap(v==="b"?"B":"A",o+sparkle(60,90,13)+sparkle(246,150,9));
+}
+function artBrow(){
+  var o="",i;
+  for(i=0;i<30;i++){var t=i/29,x=48+t*210,y=222-Math.sin(t*3.1)*44-t*40+ (t<.2?(.2-t)*90:0);
+    o+='<path d="M'+x.toFixed(1)+' '+(y+10).toFixed(1)+'l'+(10+t*6).toFixed(1)+' -'+(12+8*Math.sin(t*3)).toFixed(1)+'" stroke="#3A2615" stroke-width="2.6" stroke-linecap="round"/>';}
+  return artWrap("D",
+   '<path d="M40 236Q70 170 150 160Q220 154 262 168Q200 178 150 190Q80 202 40 236Z" fill="#3A2615"/>'+o+
+   '<g transform="translate(212 330) rotate(-38)"><rect x="-6" y="0" width="12" height="96" rx="6" fill="url(#gGold)"/><rect x="-10" y="-64" width="20" height="68" rx="10" fill="#0A0A0A"/><path d="M-10 -50h20M-10 -38h20M-10 -26h20M-10 -14h20" stroke="#6B5239" stroke-width="1.4"/></g>'+sparkle(70,96,12)+sparkle(236,92,8));
+}
+function artPolish(){
+  return artWrap("A",
+   '<path d="M52 352Q150 326 250 358" stroke="url(#sh-wine)" stroke-width="22" fill="none" stroke-linecap="round"/>'+
+   '<rect x="100" y="196" width="100" height="124" rx="24" fill="url(#sh-wine)" stroke="#0A0A0A" stroke-width="2"/><rect x="112" y="210" width="12" height="82" rx="6" fill="#fff" opacity=".35"/>'+
+   '<rect x="128" y="172" width="44" height="28" fill="url(#gGold)"/><rect x="134" y="62" width="32" height="116" rx="9" fill="#0A0A0A"/><rect x="134" y="150" width="32" height="8" fill="url(#gGold)"/>'+sparkle(236,110,14)+sparkle(64,150,9));
+}
+function artSkin(){
+  return artWrap("B",
+   '<path d="M150 104Q214 190 214 244A64 64 0 0 1 86 244Q86 190 150 104Z" fill="url(#gDrop)" stroke="url(#gGold)" stroke-width="2.5"/>'+
+   '<path d="M112 250Q112 282 140 296" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round" opacity=".9"/>'+
+   '<ellipse cx="74" cy="318" rx="34" ry="12" transform="rotate(-24 74 318)" fill="url(#gGold)"/><ellipse cx="228" cy="326" rx="34" ry="12" transform="rotate(24 228 326)" fill="url(#gGold)"/>'+
+   '<circle cx="224" cy="132" r="9" fill="none" stroke="url(#gGold)" stroke-width="2"/><circle cx="244" cy="160" r="5" fill="url(#gGold)"/><circle cx="64" cy="170" r="7" fill="none" stroke="url(#gGold)" stroke-width="2"/>'+sparkle(78,96,13));
+}
+function artPedi(){
+  var o="",a=[-62,-31,0,31,62],i;
+  for(i=0;i<5;i++)o+='<g transform="translate(150 296) rotate('+a[i]+')"><ellipse cx="0" cy="-60" rx="'+(i===2?30:26)+'" ry="'+(i===2?78:66)+'" fill="url(#gDrop)" stroke="url(#gGold)" stroke-width="2"/></g>';
+  return artWrap("D",o+'<ellipse cx="150" cy="350" rx="74" ry="19" fill="#3A2E24"/><ellipse cx="150" cy="331" rx="56" ry="16" fill="#5A4A3A"/><ellipse cx="150" cy="315" rx="38" ry="12" fill="#7C6650"/>'+sparkle(60,110,12)+sparkle(246,96,9));
+}
+function ph(name,fn){return '<span class="ph">'+fn()+'<img src="images/'+name+'.jpg" alt="" loading="lazy" onerror="this.remove()"></span>'}
+function art(k){var m={lash:["lashes",artLash],gel:["nails",artNails],lami:["brows",artBrow],mani:["manicure",function(){return artNails("b")}],pedi:["pedicure",artPedi],polish:["polish",artPolish],skin:["skin",artSkin]}[k];return ph(m[0],m[1])}
+function mountArt(){
+  $("#hA1").innerHTML=ph("hero",artLash);$("#hA2").innerHTML=ph("nails",artNails);$("#hA3").innerHTML=ph("skin",artSkin);
+  $("#tri").innerHTML=['<div class="arch">'+ph("brows",artBrow)+'</div>','<div class="arch">'+ph("polish",artPolish)+'</div>','<div class="arch">'+ph("pedicure",artPedi)+'</div>'].join("");
+  $("#artO").innerHTML=ph("olga",artNails);$("#artZ").innerHTML=ph("ozlem",artLash);
+}
+
+/* ---------- language ---------- */
+function applyLang(l){
+  lang=T[l]?l:"tr";store.set("tb-lang",lang);
+  document.documentElement.lang=lang;
+  $$("[data-i]").forEach(function(el){el.textContent=t(el.getAttribute("data-i"))});
+  $$("[data-lang]").forEach(function(b){b.setAttribute("aria-pressed",String(b.getAttribute("data-lang")===lang))});
+  renderHero();renderMarquee();renderCards();renderShades();renderStudio();renderLooks();renderLoc();renderWizard();renderStaff();fillUpCats();
+  if(!$("#bookDone").hidden)renderDone();
+}
+function splitChars(txt,d){
+  var i=0;
+  return '<span class="ln">'+txt.split(" ").map(function(w){
+    return '<span class="wd">'+Array.from(w).map(function(c){return '<span class="ch" style="--i:'+(i++)+';--d:'+d+'ms">'+esc(c)+'</span>'}).join("")+'</span>';
+  }).join('<span class="sp"></span>')+'</span>';
+}
+function renderHero(){
+  $("#mega").innerHTML=splitChars(t("h_a"),0)+'<span class="ln it">'+splitChars(t("h_b"),380).replace('<span class="ln">','').replace(/<\/span>$/,"")+'</span>';
+  $("#sub").innerHTML=t("h_sub").map(function(x){return "<span>"+esc(x)+"</span>"}).join("");
+}
+function renderMarquee(){
+  var names=SVC.map(function(k){return t("svc_"+k)});
+  var a="<span>"+names.map(function(n,i){return (i%2?"<b>"+esc(n)+"</b>":esc(n))}).join("<i>✦</i>")+"<i>✦</i></span>";
+  var b="<span>"+names.slice().reverse().map(function(n){return esc(n)}).join("<i>✦</i>")+"<i>✦</i></span>";
+  $("#mq1").innerHTML=a+a+a+a;$("#mq2").innerHTML=b+b+b+b;
+}
+
+/* ---------- services ---------- */
+function renderCards(){
+  $("#cards").innerHTML=SVC.map(function(k,i){
+    return '<button type="button" class="card" data-k="'+k+'"><span class="top"><span class="no">0'+(i+1)+'</span><span class="ci arch">'+art(k)+'</span></span><span class="txt"><h3>'+esc(t("svc_"+k))+'</h3><p>'+esc(t("sd_"+k))+'</p></span><span class="arr">'+ARROW+'</span></button>';
+  }).join("")+'<a class="card cta" href="#randevu"><span class="top"><span class="no">✦</span></span><span class="txt"><h3>'+esc(t("sv_cta_t"))+'</h3><p>'+esc(t("cta_book"))+'</p></span><span class="arr">'+ARROW+'</span></a>';
+}
+$("#cards").addEventListener("click",function(e){var b=e.target.closest("button.card");if(b)bookService(b.getAttribute("data-k"))});
+function bookService(k){
+  S.service=k;if(step>1&&!LAST)step=1;showWizard();renderWizard();
+  $("#randevu").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+/* ---------- colour try-on ---------- */
+var SHADES=[
+ {k:"nude",c:"#E3BDA6"},{k:"milk",c:"#F0C4CC"},{k:"cherry",c:"#B91C34"},{k:"wine",c:"#55122B"},
+ {k:"chrome",c:"linear-gradient(135deg,#F6F6F8,#9DA2AE 45%,#fff 60%,#7C8190)"},
+ {k:"cateye",c:"linear-gradient(135deg,#1B1428,#3B2A5B 35%,#C2A6F7 50%,#3B2A5B 65%,#1B1428)"},
+ {k:"french",c:"linear-gradient(180deg,#fff 0 28%,#EEC9BC 28%)"},{k:"noir",c:"#17171A"}
+];
+var shade="cherry";
+function renderShades(){
+  $("#shades").innerHTML=SHADES.map(function(s){
+    return '<button type="button" class="sw" data-k="'+s.k+'" aria-pressed="'+(s.k===shade)+'" aria-label="'+esc(t("sh_"+s.k))+'" title="'+esc(t("sh_"+s.k))+'"><i style="background:'+s.c+'"></i></button>';
+  }).join("");
+  $("#shadeName").textContent=t("sh_"+shade);
+}
+function setShade(k){
+  shade=k;
+  $$("#shades .sw").forEach(function(b){b.setAttribute("aria-pressed",String(b.getAttribute("data-k")===k))});
+  $("#shadeName").textContent=t("sh_"+k);
+}
+$("#shades").addEventListener("click",function(e){var b=e.target.closest(".sw");if(b)setShade(b.getAttribute("data-k"))});
+$("#shadeAdd").addEventListener("click",function(){
+  var names=SHADES.map(function(s){return ["tr","en","ru"].map(function(l){return T[l]["sh_"+s.k]})}).reduce(function(a,b){return a.concat(b)},[]);
+  var lines=S.note.split("\n").filter(function(l){return !names.some(function(n){return l.trim().slice(-n.length)===n&&l.indexOf(":")>-1})});
+  lines.push(t("colorWord")+": "+t("sh_"+shade));
+  S.note=lines.join("\n").trim();
+  if(LAST){LAST=null;$("#bookDone").hidden=true;$("#bkWiz").hidden=false}
+  step=Math.max(step,4)===5?4:4;renderWizard();
+  $("#randevu").scrollIntoView({behavior:"smooth",block:"start"});
+});
+
+/* ---------- studio / location ---------- */
+function renderStudio(){
+  $("#statement").innerHTML=esc(t("st_a"))+' <b>'+esc(t("st_b"))+'</b>';
+  $("#blocks").innerHTML=[1,2,3,4].map(function(n){return '<div class="blk"><span class="n">0'+n+'</span><div><h3>'+esc(t("b"+n+"t"))+'</h3><p>'+esc(t("b"+n+"d"))+'</p></div></div>'}).join("");
+}
+function renderLoc(){
+  $("#addr").textContent=CONFIG.address||t("lc_city");
+  var btns='<a class="btn" target="_blank" rel="noopener" href="'+CONFIG.instagramDM+'">'+esc(t("lc_dm"))+'</a>';
+  if(CONFIG.phone)btns+='<a class="btn line" href="tel:'+esc(CONFIG.phone.replace(/[^\d+]/g,""))+'">'+esc(t("lc_call"))+'</a>';
+  if(CONFIG.maps)btns+='<a class="btn line" target="_blank" rel="noopener" href="'+esc(CONFIG.maps)+'">'+esc(t("lc_dir"))+'</a>';
+  $("#locBtns").innerHTML=btns;
+  var out=[];
+  for(var d=1;d<=7;d++){
+    var dow=d%7,ref=new Date(2024,0,7+dow),name=new Intl.DateTimeFormat(LOC[lang],{weekday:"long"}).format(ref);
+    var closed=CONFIG.closedDays.indexOf(dow)>-1;
+    out.push('<li'+(closed?' class="off"':'')+'><span>'+esc(name)+'</span><b>'+(closed?esc(t("lc_closed")):pad(CONFIG.open)+':00 – '+pad(CONFIG.close)+':00')+'</b></li>');
+  }
+  $("#hours").innerHTML=out.join("");
+}
+
+/* ---------- looks strip ---------- */
+var CATS=[{k:"nail",a:"gel"},{k:"lash",a:"lash"},{k:"brow",a:"lami"},{k:"skin",a:"skin"},{k:"nail",a:"polish"},{k:"nail",a:"mani"},{k:"skin",a:"pedi"}];
+function fillUpCats(){
+  var sel=$("#upCat"),v=sel.value;
+  sel.innerHTML=["nail","lash","brow","skin"].map(function(c){return '<option value="'+c+'">'+esc(t("cat_"+c))+'</option>'}).join("");
+  if(v)sel.value=v;
+}
+function renderLooks(){
+  var photos=CONFIG.photos.map(function(p,i){return {src:p.src,cat:p.cat||"nail",tag:p.tag||(i%2?"new":"trend")}}).concat(GAL.map(function(p,i){return {src:"/_blob/"+p.asset,cat:p.cat,tag:i%3?"new":"trend",id:p.id}}));
+  var g=$("#strip");
+  if(!photos.length){
+    g.innerHTML=CATS.map(function(c,i){
+      return '<a class="tile" href="https://www.instagram.com/twobeauty33" target="_blank" rel="noopener"><span class="bg">'+art(c.a)+'</span><span class="tg">'+esc(t(i%2?"tag_new":"tag_trend"))+'</span>'+(i%2===0?'<span class="pl"><svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M7 4l13 8-13 8z"/></svg></span>':'')+'<span class="cap">'+esc(t("cat_"+c.k))+'<small>@twobeauty33</small></span></a>';
+    }).join("");
+    return;
+  }
+  g.innerHTML=photos.map(function(p){
+    return '<figure class="tile photo" style="margin:0"><img loading="lazy" alt="" src="'+esc(p.src)+'" onerror="this.style.display=\'none\'"><span class="tg">'+esc(t(p.tag==="new"?"tag_new":"tag_trend"))+'</span><span class="cap">'+esc(t("cat_"+p.cat))+'</span>'+(p.id&&ASSETS&&isStaff?'<button type="button" class="rm" data-rm="'+esc(p.id)+'">'+esc(armed==="g"+p.id?t("ga_sure"):t("ga_del"))+'</button>':'')+'</figure>';
+  }).join("");
+}
+$("#stripL").addEventListener("click",function(){$("#strip").scrollBy({left:-310,behavior:"smooth"})});
+$("#stripR").addEventListener("click",function(){$("#strip").scrollBy({left:310,behavior:"smooth"})});
+$("#strip").addEventListener("click",async function(e){
+  var b=e.target.closest("[data-rm]");if(!b||!DB)return;
+  var id=b.getAttribute("data-rm");
+  if(armed!=="g"+id){armed="g"+id;renderLooks();return}
+  armed="";var p=GAL.filter(function(x){return x.id===id})[0];
+  try{await DB.doc("gallery/"+id).delete();if(p&&ASSETS)try{await ASSETS.delete(p.asset)}catch(_){}}catch(err){}
+});
+$("#upFile").addEventListener("change",async function(e){
+  var files=Array.prototype.slice.call(e.target.files||[]),msg=$("#upMsg");
+  if(!files.length||!ASSETS||!DB)return;
+  msg.textContent=t("ga_up");
+  try{
+    for(var i=0;i<files.length;i++){
+      var r=await ASSETS.upload(files[i]);
+      await DB.collection("gallery").add({asset:r.id,cat:$("#upCat").value,createdAt:new Date().toISOString()});
+    }
+    msg.textContent=t("ga_ok");
+  }catch(err){msg.textContent=t("ga_fail")}
+  e.target.value="";
+});
+
+/* ---------- booking wizard ---------- */
+function masterLabel(m){return m==="olga"?"Olga":m==="ozlem"?"Özlem":t("any")}
+function slotId(d,tm,m){return d+"_"+tm.replace(":","")+"_"+m}
+function isTaken(d,tm,m){
+  if(m==="any")return !!TAKEN[slotId(d,tm,"olga")]&&!!TAKEN[slotId(d,tm,"ozlem")];
+  return !!TAKEN[slotId(d,tm,m)];
+}
+function showWizard(){if(LAST){LAST=null}$("#bookDone").hidden=true;$("#bkWiz").hidden=false}
+var STEPIC=['<svg viewBox="0 0 24 24"><path d="M10 3l1.9 5.1L17 10l-5.1 1.9L10 17l-1.9-5.1L3 10l5.1-1.9z"/><path d="M18.5 14.5l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9z"/></svg>','<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 21c.4-4.2 3.5-6.5 7.5-6.5s7.1 2.3 7.5 6.5"/></svg>','<svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3.5"/><path d="M3.5 10.2h17M8 3v4M16 3v4"/><circle cx="12" cy="15" r="1.2" fill="currentColor"/></svg>','<svg viewBox="0 0 24 24"><rect x="4.5" y="3.5" width="15" height="17" rx="3"/><path d="M8.5 8.5h7M8.5 12h7M8.5 15.5h4"/></svg>','<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.4l2.7 2.7L16 9.6"/></svg>','<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>'];
+function renderWizard(){
+  var names=["w1","w2","w3","w4","w5"];
+  $("#steps").innerHTML=names.map(function(k,i){var n=i+1;return '<li class="'+(n===step?"on":n<step?"done":"")+'"'+(n===step?' aria-current="step"':'')+'><b>'+(n<step?STEPIC[5]:STEPIC[i])+'</b><span>'+esc(t(k))+'</span></li>'}).join("");
+  var p=$("#pane"),h='<h3>'+esc(t("h"+step))+'</h3>';
+  if(step===1){
+    h+='<div class="opts" role="group">'+SVC.map(function(k){return '<button type="button" class="opt" data-svc="'+k+'" aria-pressed="'+(S.service===k)+'"><span class="oi">'+svg(k)+'</span><b>'+esc(t("svc_"+k))+'</b></button>'}).join("")+'</div>';
+  }else if(step===2){
+    h+='<div class="opts" role="group">'+[["any","a"],["olga","o"],["ozlem","z"]].map(function(m){return '<button type="button" class="opt" data-m="'+m[0]+'" aria-pressed="'+(S.master===m[0])+'"><i class="'+m[1]+'"></i><b>'+esc(masterLabel(m[0]))+'</b></button>'}).join("")+'</div>';
+  }else if(step===3){
+    h+='<div class="dates" id="bkDates" role="group">'+datesHtml()+'</div><div class="times" id="bkTimes" role="group">'+timesHtml()+'</div>';
+  }else if(step===4){
+    h+='<div class="fields"><div class="fld"><label for="fName">'+esc(t("f_name"))+'</label><input id="fName" autocomplete="name" placeholder="'+esc(t("ph_name"))+'" value="'+esc(S.name)+'"></div>'+
+       '<div class="fld"><label for="fPhone">'+esc(t("f_phone"))+'</label><input id="fPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="'+esc(t("ph_phone"))+'" value="'+esc(S.phone)+'"></div>'+
+       '<div class="fld full"><label for="fNote">'+esc(t("f_note"))+'</label><textarea id="fNote" placeholder="'+esc(t("ph_note"))+'">'+esc(S.note)+'</textarea></div></div>';
+  }else{
+    h+='<div class="sum">'+[["tk_service",S.service?t("svc_"+S.service):""],["tk_master",masterLabel(S.master)],["tk_date",S.date?fmtDate(S.date):""],["tk_time",S.time],["tk_name",S.name.trim()],["f_phone",S.phone.trim()]].map(function(r){return '<div><span>'+esc(t(r[0]))+'</span><b>'+esc(r[1])+'</b></div>'}).join("")+(S.note?'<div><span>'+esc(t("f_note"))+'</span><b>'+esc(S.note)+'</b></div>':'')+'</div>';
+  }
+  h+='<p class="err" id="bkErr" role="alert"></p>';
+  p.innerHTML=h;
+  $("#bBack").style.visibility=step===1?"hidden":"visible";
+  $("#bNext").textContent=step===5?t("bk_confirm"):t("next");
+}
+function datesHtml(){
+  var now=new Date(),base=new Date(now.getFullYear(),now.getMonth(),now.getDate()),out=[];
+  for(var i=0;i<CONFIG.horizon;i++){
+    var d=new Date(base.getFullYear(),base.getMonth(),base.getDate()+i),s=ymd(d),closed=CONFIG.closedDays.indexOf(d.getDay())>-1;
+    var wd=new Intl.DateTimeFormat(LOC[lang],{weekday:"short"}).format(d),mo=new Intl.DateTimeFormat(LOC[lang],{month:"short"}).format(d);
+    out.push('<button type="button" data-d="'+s+'" aria-pressed="'+(S.date===s)+'"'+(closed?' disabled':'')+'><small>'+esc(wd)+'</small><b>'+d.getDate()+'</b><small>'+esc(mo)+'</small></button>');
+  }
+  return out.join("");
+}
+function timesHtml(){
+  if(!S.date)return '<p class="none">'+esc(t("pickDate"))+'</p>';
+  var now=new Date(),out=[],any=false;
+  for(var h=CONFIG.open;h<CONFIG.close;h++){
+    var tm=pad(h)+":00",d=parseYmd(S.date);d.setHours(h,0,0,0);
+    var dis=d.getTime()<=now.getTime()+CONFIG.leadMinutes*60000||isTaken(S.date,tm,S.master);
+    if(!dis)any=true;
+    out.push('<button type="button" data-t="'+tm+'" aria-pressed="'+(S.time===tm)+'"'+(dis?' disabled':'')+'>'+tm+'</button>');
+  }
+  return any?out.join(""):'<p class="none">'+esc(t("timesNone"))+'</p>';
+}
+function refreshTimes(){if(step===3&&$("#bkTimes"))$("#bkTimes").innerHTML=timesHtml()}
+$("#pane").addEventListener("click",function(e){
+  var b;
+  if((b=e.target.closest("[data-svc]"))){S.service=b.getAttribute("data-svc");renderWizard();return}
+  if((b=e.target.closest("[data-m]"))){S.master=b.getAttribute("data-m");if(S.time&&isTaken(S.date,S.time,S.master))S.time="";renderWizard();return}
+  if((b=e.target.closest("[data-d]"))){S.date=b.getAttribute("data-d");S.time="";loadBusy();$$("#bkDates button").forEach(function(x){x.setAttribute("aria-pressed",String(x===b))});refreshTimes();return}
+  if((b=e.target.closest("[data-t]"))){S.time=b.getAttribute("data-t");$$("#bkTimes button").forEach(function(x){x.setAttribute("aria-pressed",String(x===b))});return}
+});
+$("#pane").addEventListener("input",function(e){
+  var id=e.target.id;if(id==="fName")S.name=e.target.value;if(id==="fPhone")S.phone=e.target.value;if(id==="fNote")S.note=e.target.value;
+});
+function validate(n){
+  if(n===1&&!S.service)return t("e_svc");
+  if(n===3&&(!S.date||!S.time))return t("e_when");
+  if(n===4){
+    if(S.name.trim().length<2)return t("e_name");
+    var dg=S.phone.replace(/\D/g,"");if(dg.length<10||dg.length>15)return t("e_phone");
+  }
+  return "";
+}
+$("#bBack").addEventListener("click",function(){if(step>1){step--;renderWizard()}});
+$("#bNext").addEventListener("click",function(){
+  var e=validate(step);
+  if(e){$("#bkErr").textContent=e;return}
+  if(step<5){step++;renderWizard();$("#bkCard").scrollIntoView({behavior:"smooth",block:"start"});return}
+  confirmBooking();
+});
+
+/* backends: Apps Script (Google Calendar) -> artifact db -> message */
+async function loadBusy(){
+  if(!CONFIG.endpoint)return;
+  try{
+    var to=new Date();to.setDate(to.getDate()+CONFIG.horizon);
+    var r=await fetch(CONFIG.endpoint+"?action=busy&from="+TODAY+"&to="+ymd(to));
+    var j=await r.json();var m={};(j.busy||[]).forEach(function(k){m[k]=true});TAKEN=m;refreshTimes();
+  }catch(e){}
+}
+async function remoteSave(b){
+  var r=await fetch(CONFIG.endpoint,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({date:b.date,time:b.time,master:b.master,service:t("svc_"+b.service),serviceKey:b.service,name:b.name,phone:b.phone,note:b.note,lang:lang,hp:""})});
+  return await r.json();
+}
+async function dbSave(b){
+  var order=b.master==="any"?["olga","ozlem"]:[b.master];
+  for(var i=0;i<order.length;i++){
+    var m=order[i],id=slotId(b.date,b.time,m),ref=DB.doc("slots/"+id);
+    var lease=await ref.acquire({holder:HOLDER,ttlMs:6000});
+    if(!lease.acquired)continue;
+    var snap=await ref.get(),d=snap.data();
+    if(snap.exists&&d&&d.claimed)continue;
+    await ref.set({claimed:true,date:b.date,time:b.time,master:m,ts:new Date().toISOString()});
+    try{
+      await DB.doc("bookings/"+id).set({date:b.date,time:b.time,master:m,service:b.service,name:b.name,phone:b.phone,note:b.note,status:isStaff?"confirmed":"pending",lang:lang,createdAt:new Date().toISOString(),by:uid||null,source:isStaff?"staff":"web"});
+    }catch(err){try{await ref.delete()}catch(_){}throw err}
+    return {ok:true,master:m};
+  }
+  return {ok:false,reason:"taken"};
+}
+async function confirmBooking(){
+  var btn=$("#bNext");btn.disabled=true;
+  var b={service:S.service,master:S.master,date:S.date,time:S.time,name:S.name.trim(),phone:S.phone.trim(),note:S.note.trim()},mode="send";
+  try{
+    if(CONFIG.endpoint){
+      var r=await remoteSave(b);
+      if(r&&r.ok){mode="saved";if(r.master)b.master=r.master}
+      else if(r&&r.reason==="taken"){step=3;await loadBusy();renderWizard();$("#bkErr").textContent=t("d_taken");btn.disabled=false;return}
+    }else if(DB&&canWrite!==false){
+      var r2=await dbSave(b);
+      if(r2.ok){mode="saved";b.master=r2.master}
+      else{step=3;renderWizard();$("#bkErr").textContent=t("d_taken");btn.disabled=false;return}
+    }
+  }catch(err){if(err&&err.code==="invalid_argument")canWrite=false}
+  btn.disabled=false;LAST={b:b,mode:mode};
+  $("#bkWiz").hidden=true;$("#bookDone").hidden=false;renderDone();
+  $("#bkCard").scrollIntoView({behavior:"smooth",block:"start"});
+}
+function summary(b){
+  return [t("msg_hi"),t("tk_service")+": "+t("svc_"+b.service),t("tk_master")+": "+masterLabel(b.master),t("tk_date")+": "+fmtDate(b.date)+" "+b.time,t("tk_name")+": "+b.name,t("f_phone")+": "+b.phone,b.note?t("f_note")+": "+b.note:""].filter(Boolean).join("\n");
+}
+function calLink(b){
+  var d=b.date.replace(/-/g,""),h=+b.time.slice(0,2),s=d+"T"+pad(h)+"0000",e=d+"T"+pad(h+1)+"0000";
+  return "https://calendar.google.com/calendar/render?action=TEMPLATE&text="+encodeURIComponent("Two Beauty · "+t("svc_"+b.service))+"&dates="+s+"/"+e+"&ctz=Europe/Istanbul&location="+encodeURIComponent("Two Beauty, Mersin")+"&details="+encodeURIComponent(masterLabel(b.master)+(b.note?"\n"+b.note:""));
+}
+function renderDone(){
+  if(!LAST)return;var b=LAST.b,saved=LAST.mode==="saved",msg=summary(b);
+  var wa=CONFIG.whatsapp?'<a class="btn" target="_blank" rel="noopener" href="https://wa.me/'+CONFIG.whatsapp+'?text='+encodeURIComponent(msg)+'">'+esc(t("d_wa"))+'</a>':"";
+  $("#bookDone").innerHTML='<svg viewBox="0 0 64 64" class="ic draw" aria-hidden="true"><circle cx="32" cy="32" r="26" pathLength="1"/><path d="M20 33l8 8 16-17" pathLength="1"/></svg>'+
+   '<h3>'+esc(t(saved?"d_saved_t":"d_send_t"))+'</h3><p>'+esc(t(saved?"d_saved_p":"d_send_p"))+'</p><pre id="sumTxt">'+esc(msg)+'</pre>'+
+   '<div class="acts">'+wa+'<a class="btn'+(wa?' line':'')+'" target="_blank" rel="noopener" href="'+calLink(b)+'">'+esc(t("d_cal"))+'</a><button class="btn line" type="button" id="cpBtn">'+esc(t("d_copy"))+'</button><a class="btn line" target="_blank" rel="noopener" href="'+CONFIG.instagramDM+'">'+esc(t("d_ig"))+'</a><button class="btn line" type="button" id="newBtn">'+esc(t("d_new"))+'</button></div>';
+}
+$("#bookDone").addEventListener("click",function(e){
+  if(e.target.id==="cpBtn"){
+    var txt=$("#sumTxt").textContent,btn=e.target,ok=function(){btn.textContent=t("d_copied")};
+    var fb=function(){var r=document.createRange();r.selectNodeContents($("#sumTxt"));var s=getSelection();s.removeAllRanges();s.addRange(r);ok()};
+    try{navigator.clipboard.writeText(txt).then(ok,fb)}catch(_){fb()}
+  }
+  if(e.target.id==="newBtn"){
+    S={service:"",master:"any",date:"",time:"",name:"",phone:"",note:""};LAST=null;step=1;
+    $("#bookDone").hidden=true;$("#bkWiz").hidden=false;renderWizard();
+    $("#randevu").scrollIntoView({behavior:"smooth",block:"start"});
+  }
+});
+
+/* ---------- staff (artifact only) ---------- */
+function renderStaff(){
+  if(!isStaff)return;
+  $("#sfTabs").innerHTML=[["pending",t("sf_pending")],["confirmed",t("sf_confirmed")],["all",t("sf_all")]].map(function(x){return '<button type="button" class="tab" data-f="'+x[0]+'" aria-pressed="'+(x[0]===sfFilter)+'">'+esc(x[1])+'</button>'}).join("");
+  var list=BK.filter(function(b){return sfFilter==="all"||b.status===sfFilter}).sort(function(a,b){return (a.date+a.time).localeCompare(b.date+b.time)});
+  if(!list.length){$("#sfList").innerHTML='<div class="empty-state">'+esc(t("sf_empty"))+'</div>';return}
+  $("#sfList").innerHTML=list.map(function(b){
+    var st=b.status||"pending",id=b.id;
+    return '<article class="bk"><div class="when"><b>'+esc(b.time)+'</b><small>'+esc(fmtDate(b.date,{weekday:"short",day:"numeric",month:"short"}))+'</small></div>'+
+      '<div class="who"><b>'+esc(b.name)+'</b><span>'+esc(t("svc_"+b.service))+' · '+esc(masterLabel(b.master))+'</span><span>'+esc(b.phone)+(b.note?' · '+esc(b.note):'')+'</span></div>'+
+      '<div class="act"><span class="pill '+esc(st)+'">'+esc(t("st_"+st))+'</span>'+
+      (st==="pending"?'<button class="btn sm" type="button" data-a="confirm" data-id="'+esc(id)+'">'+esc(t("sf_confirm"))+'</button>':'')+
+      '<button class="btn sm line" type="button" data-a="phone" data-id="'+esc(id)+'">'+esc(t("sf_copy"))+'</button>'+
+      (st!=="cancelled"?'<button class="btn sm line" type="button" data-a="cancel" data-id="'+esc(id)+'">'+esc(armed==="c"+id?t("ga_sure"):t("sf_cancel"))+'</button>':'')+
+      '<button class="btn sm line" type="button" data-a="del" data-id="'+esc(id)+'">'+esc(armed==="d"+id?t("ga_sure"):t("sf_delete"))+'</button></div></article>';
+  }).join("");
+}
+$("#sfTabs").addEventListener("click",function(e){var b=e.target.closest("[data-f]");if(b){sfFilter=b.getAttribute("data-f");renderStaff()}});
+$("#sfList").addEventListener("click",async function(e){
+  var b=e.target.closest("[data-a]");if(!b||!DB)return;
+  var a=b.getAttribute("data-a"),id=b.getAttribute("data-id"),bk=BK.filter(function(x){return x.id===id})[0];if(!bk)return;
+  try{
+    if(a==="phone"){try{await navigator.clipboard.writeText(bk.phone)}catch(_){}b.textContent=t("d_copied");return}
+    if(a==="confirm"){await DB.doc("bookings/"+id).update({status:"confirmed"});return}
+    var key=(a==="cancel"?"c":"d")+id;
+    if(armed!==key){armed=key;renderStaff();return}
+    armed="";
+    if(a==="cancel"){await DB.doc("bookings/"+id).update({status:"cancelled"});await DB.doc("slots/"+id).delete()}
+    if(a==="del"){await DB.doc("bookings/"+id).delete();await DB.doc("slots/"+id).delete()}
+  }catch(err){}
+});
+
+/* ---------- data wiring (artifact runtime; absent on a static site) ---------- */
+async function cu(n){try{return window.claude&&window.claude.use?await window.claude.use(n):null}catch(e){return null}}
+async function boot(){
+  loadBusy();
+  USER=await cu("user");
+  if(USER){
+    try{isStaff=!!(USER.canEdit&&USER.canEdit())}catch(e){}
+    try{canWrite=USER.can?USER.can("data.write"):null}catch(e){}
+    try{uid=USER.id?await USER.id():null}catch(e){}
+  }
+  DB=await cu("db");
+  if(!DB)return;
+  try{
+    DB.collection("slots").where("date",">=",TODAY).onSnapshot(function(snap){
+      var m={};snap.docs.forEach(function(d){var x=d.data();if(x&&x.claimed)m[d.id]=true});TAKEN=m;refreshTimes();
+    },function(){});
+    DB.collection("gallery").orderBy("createdAt","desc").limit(80).onSnapshot(function(snap){
+      GAL=snap.docs.map(function(d){var x=d.data()||{};return {id:d.id,asset:x.asset,cat:x.cat||"nail"}}).filter(function(p){return p.asset});renderLooks();
+    },function(){});
+    if(isStaff){
+      $("#yonetim").hidden=false;
+      DB.collection("bookings").where("date",">=",TODAY).onSnapshot(function(snap){
+        BK=snap.docs.map(function(d){var x=d.data()||{};x.id=d.id;return x});renderStaff();
+      },function(){});
+    }
+  }catch(e){}
+  ASSETS=await cu("assets");
+  if(ASSETS){$("#upBar").hidden=false;renderLooks()}
+}
+
+/* ---------- theme / language buttons ---------- */
+$("#themeBtn").addEventListener("click",function(){
+  var root=document.documentElement,cur=root.getAttribute("data-theme");
+  if(!cur)cur="light";
+  var next=cur==="dark"?"light":"dark";root.setAttribute("data-theme",next);store.set("tb-theme",next);
+});
+var stt=store.get("tb-theme");if(stt==="dark"||stt==="light")document.documentElement.setAttribute("data-theme",stt);
+$$("[data-lang]").forEach(function(b){b.addEventListener("click",function(){applyLang(b.getAttribute("data-lang"))})});
+
+/* ---------- motion ---------- */
+var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+function counters(){
+  $$("[data-count]").forEach(function(el){
+    var to=+el.getAttribute("data-count");
+    function run(){
+      if(reduce){el.textContent=to.toLocaleString("tr-TR");return}
+      var t0=performance.now();(function step(n){var p=Math.min(1,(n-t0)/1600);el.textContent=Math.round(to*(1-Math.pow(1-p,3))).toLocaleString("tr-TR");if(p<1)requestAnimationFrame(step)})(t0);
+    }
+    if(!("IntersectionObserver" in window)){el.textContent=to.toLocaleString("tr-TR");return}
+    var io=new IntersectionObserver(function(en){if(en[0].isIntersecting){io.disconnect();run()}});io.observe(el);
+  });
+}
+function reveal(){
+  var els=$$(".will");
+  if(!("IntersectionObserver" in window)||reduce){els.forEach(function(e){e.classList.add("in")});return}
+  var vh=innerHeight;els.forEach(function(e){if(e.getBoundingClientRect().top<vh)e.classList.add("in")});
+  var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target)}})},{threshold:.08});
+  els.forEach(function(e){if(!e.classList.contains("in"))io.observe(e)});
+  setTimeout(function(){els.forEach(function(e){e.classList.add("in")})},4000);
+}
+function scrollFx(){
+  var prog=$("#prog"),c1=$(".c1"),c3=$(".c3"),links=$$(".links a"),secs=["top","hizmetler","studyo","ustalar","gorunumler","randevu"].map(function(id){return document.getElementById(id)});
+  var tick=false;
+  function upd(){
+    tick=false;
+    var h=document.documentElement,max=h.scrollHeight-innerHeight,y=scrollY;
+    prog.style.transform="scaleX("+(max>0?Math.min(1,y/max):0)+")";
+    if(!reduce&&y<1400){c1.style.translate="0 "+(y*.12)+"px";c3.style.translate="0 "+(y*-.08)+"px"}
+    var cur=0;secs.forEach(function(s,i){if(s&&s.getBoundingClientRect().top<innerHeight*.4)cur=i});
+    links.forEach(function(a,i){a.classList.toggle("on",i===cur)});
+  }
+  addEventListener("scroll",function(){if(!tick){tick=true;requestAnimationFrame(upd)}},{passive:true});upd();
+}
+
+/* ---------- init ---------- */
+
+var sl=store.get("tb-lang"),nv=(navigator.language||"tr").slice(0,2).toLowerCase();
+mountArt();
+applyLang(sl&&T[sl]?sl:(T[nv]?nv:"tr"));
+counters();reveal();scrollFx();boot();
+})();
+</script>
