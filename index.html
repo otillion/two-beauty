@@ -343,7 +343,7 @@ select,input,textarea{font:inherit;color:var(--ink);background:var(--card);borde
   .steps li b{width:38px;height:38px}.steps li+li::before{top:27px;left:-30%;width:40%}.steps li span{max-width:100%}
 }
 @media (max-width:620px){
-  .brand span{display:none}.nav .btn{display:none}
+  .brand span{display:none}.nav .nav-book{padding:.8em 1.05em;font-size:12px;letter-spacing:.1em;white-space:nowrap;flex:none}.nav .wrap{gap:10px}.ctrl{margin-left:auto}
   .cards{grid-template-columns:minmax(0,1fr)}.card{min-height:250px}
   .fields{grid-template-columns:minmax(0,1fr)}.pane,.done{padding:24px 18px}.nav-b{padding:0 18px 24px}.hint{padding:0 18px 18px}
   .m{padding:26px;min-height:400px}.m .m-art{width:36%;right:20px;bottom:20px}.m>*:not(.m-art){max-width:60%}
@@ -353,10 +353,86 @@ select,input,textarea{font:inherit;color:var(--ink);background:var(--card);borde
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
   .mq{animation:none}
 }
+
+/* ---- larger, clearer sizing ---- */
+body{font-size:18px;line-height:1.65}
+.eyebrow{font-size:14px}
+.sec-head p,.lead{font-size:19px}
+.btn{font-size:15px;padding:1.1em 2em}
+.chip-i{font-size:16px;padding:11px 18px 11px 14px}
+.brand img{width:48px;height:48px}.brand span{font-size:24px}
+.links a{font-size:14px}
+.nav .nav-book{order:-1;margin-right:6px;white-space:nowrap;flex:none}.ctrl{margin-left:auto}
+.card{padding:30px}.card .ci{width:96px;height:128px}.card h3{font-size:36px}.card p{font-size:17px}
+.stats span{font-size:14px}
+.m .role{font-size:14px}.m p{font-size:18px}
+.tile .tg{font-size:13px}.tile .cap{font-size:32px}.tile .cap small{font-size:14px}
+.sw{width:64px;height:64px}
+.pane{padding:44px}.pane h3{font-size:clamp(32px,4.4vw,52px)}
+.opts{grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.opt{padding:22px;gap:16px;border-radius:18px}.opt .oi{width:44px;height:44px}.opt b{font-size:19px}.opt i{width:18px;height:18px}
+.fld label{font-size:14px}.fld input,.fld textarea,select{font-size:18px;padding:15px 16px}
+.hint{font-size:16px;padding:0 44px 28px}
+.steps li{font-size:14px;padding:20px 12px 22px}
+.steps li b{width:54px;height:54px}.steps li b svg{width:26px;height:26px}
+.steps li+li::before{top:41px}
+@media (max-width:760px){
+  body{font-size:17px}
+  .pane,.done{padding:28px 18px}
+  .card .ci{width:80px;height:108px}.card h3{font-size:32px}
+  .steps li{font-size:10.5px;padding:12px 0 16px;letter-spacing:.02em}
+  .steps li b{width:46px;height:46px}.steps li b svg{width:23px;height:23px}.steps li+li::before{top:35px}
+  .opts{grid-template-columns:minmax(0,1fr)}
+  .opt{padding:20px}.hint{padding:0 18px 22px}
+  .tile .cap{font-size:28px}
+}
+@media (max-width:390px){.nav .brand{display:none}}
+
+/* ---- medium sizing ---- */
+body{font-size:19px}
+.eyebrow{font-size:15px}
+.sec-head p,.lead{font-size:20px}
+.btn{font-size:16px;padding:1.1em 2.1em}.btn.sm{font-size:14px;padding:.9em 1.4em}
+.chip-i{font-size:17px}
+.brand img{width:50px;height:50px}.brand span{font-size:25px;white-space:nowrap}
+.links a{font-size:15px}.links{gap:24px}
+.nav .wrap{min-height:72px}
+.seg button{font-size:13px;padding:8px 12px}.icon-btn{width:44px;height:44px}
+.card{padding:32px}.card .ci{width:104px;height:140px}.card h3{font-size:39px}.card p{font-size:18px}
+.stats span{font-size:15px}
+.m .role{font-size:15px}.m p{font-size:19px}
+.tile .tg{font-size:14px}.tile .cap{font-size:35px}.tile .cap small{font-size:15px}
+.sw{width:70px;height:70px}
+.pane{padding:48px}.pane h3{font-size:clamp(34px,4.6vw,56px);line-height:1.05}
+.opts{grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:15px}
+.opt{padding:24px;gap:17px}.opt .oi{width:50px;height:50px}.opt b{font-size:20px}.opt i{width:20px;height:20px}
+.fld label{font-size:15px}.fld input,.fld textarea,select{font-size:19px;padding:16px 17px}
+.hint{font-size:17px;padding:0 48px 30px}
+.steps li{font-size:15px;padding:22px 13px 24px}
+.steps li b{width:58px;height:58px}.steps li b svg{width:28px;height:28px}
+.steps li+li::before{top:44px}
+@media (max-width:760px){
+  body{font-size:18px}
+  .nav .wrap{min-height:70px}
+  .nav .nav-book{font-size:13px;padding:.85em 1.1em}
+  .seg button{font-size:12.5px;padding:8px 10px}.icon-btn{width:42px;height:42px}
+  .pane,.done{padding:28px 18px}
+  .card .ci{width:88px;height:118px}.card h3{font-size:34px}.card p{font-size:17px}
+  .steps li{font-size:9.5px;padding:12px 0 17px;letter-spacing:-.01em}
+  .steps li b{width:48px;height:48px}.steps li b svg{width:24px;height:24px}.steps li+li::before{top:36px}
+  .opt{padding:21px}.opt b{font-size:20px}.hint{padding:0 18px 22px;font-size:16px}
+  .tile .cap{font-size:30px}
+  .sw{width:64px;height:64px}
+}
+@media (max-width:1280px){.nav .brand span{display:none}.links{gap:18px}}
+@media (max-width:1040px){.links{display:none}}
+.steps li+li::before{display:none}
+@media (max-width:760px){.steps li+li::before{display:block}}
 </style>
 
 <header class="nav">
   <div class="wrap">
+    <a class="btn sm nav-book" href="#randevu" data-i="cta_nav"></a>
     <a class="brand" href="#top" aria-label="Two Beauty"><img src="data:image/jpeg;base64,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" alt="" width="40" height="40"><span>TWO BEAUTY</span></a>
     <nav class="links" aria-label="Menu">
       <a href="#top" data-i="nav_home"></a>
@@ -373,7 +449,6 @@ select,input,textarea{font:inherit;color:var(--ink);background:var(--card);borde
         <button type="button" data-lang="ru" aria-pressed="false">RU</button>
       </div>
       <button class="icon-btn" id="themeBtn" type="button" aria-label="Theme"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 2a6 6 0 0 1 0 12z" fill="currentColor"/></svg></button>
-      <a class="btn sm" href="#randevu" data-i="cta_nav"></a>
     </div>
   </div>
   <div class="prog" id="prog"></div>
